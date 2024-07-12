@@ -78,11 +78,11 @@ Single page RMA request:
 Known issues / Roadmap
 ======================
 
-- When you try to request an RMA from a Sales Order in the portal, a
-  popup appears and the inputs for the quantity doesn't allow decimal
-  numbers. It would be good to have a component that allows that and at
-  the same time keeps the constraint of not allowing a number greater
-  than the order line product quantity.
+-  When you try to request an RMA from a Sales Order in the portal, a
+   popup appears and the inputs for the quantity doesn't allow decimal
+   numbers. It would be good to have a component that allows that and at
+   the same time keeps the constraint of not allowing a number greater
+   than the order line product quantity.
 
 Bug Tracker
 ===========
@@ -105,15 +105,17 @@ Authors
 Contributors
 ------------
 
-- `Tecnativa <https://www.tecnativa.com>`__:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  - Ernesto Tejeda
-  - Pedro M. Baeza
-  - David Vidal
-  - Víctor Martínez
+   -  Ernesto Tejeda
+   -  Pedro M. Baeza
+   -  David Vidal
+   -  Víctor Martínez
 
-- Chafique Delli <chafique.delli@akretion.com>
-- Giovanni Serra - Ooops <giovanni@ooops404.com>
+-  Chafique Delli <chafique.delli@akretion.com>
+-  Giovanni Serra - Ooops <giovanni@ooops404.com>
+-  Souheil Bejaoui - ACSONE SA/NV souheil.bejaoui@acsone.eu
+-  Jacques-Etienne Baudoux - BCIM je@bcim.be
 
 Maintainers
 -----------
