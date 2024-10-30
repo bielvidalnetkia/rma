@@ -37,7 +37,7 @@
                             />
                                 <field
                                 name="return_product_id"
-                                attrs="{'invisible': [('different_return_product', '=', False)], 'required': [('different_return_product', '=', True)]}"
+                                attrs="{'invisible': [('different_return_product', '=', False)], 'required': [('different_return_product', '=', True), ('quantity', '>', 0)]}"
                             />
                             <field name="different_return_product" invisible="1" />
                         </tree>
