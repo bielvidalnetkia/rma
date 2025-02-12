@@ -345,6 +345,15 @@ msgstr ""
 "                                </span>"
 
 #. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
+msgid ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" groups=\"base.group_multi_company\"/>"
+msgstr ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"I valori impostati qui sono "
+"specifici per azienda.\" groups=\"base.group_multi_company\"/>"
+
+#. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.portal_rma_page
 msgid "<strong class=\"d-block mb-1\">Delivery</strong>"
 msgstr "<strong class=\"d-block mb-1\">Consegna</strong>"
@@ -574,6 +583,11 @@ msgid "Avatar"
 msgstr "Avatar"
 
 #. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.rma_view_search
+msgid "Awaiting Action"
+msgstr ""
+
+#. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma__can_be_finished
 msgid "Can Be Finished"
 msgstr "Può essere chiuso"
@@ -631,6 +645,11 @@ msgstr "Categoria UdM"
 #: model_terms:ir.actions.act_window,help:rma.rma_team_action
 msgid "Click to add a new RMA."
 msgstr "Fai click per aggiungere un nuovo RMA."
+
+#. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.rma_view_search
+msgid "Closed"
+msgstr ""
 
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma_tag__color
@@ -1258,6 +1277,11 @@ msgid "Number of messages with delivery error"
 msgstr "Numero di messaggi con errore di consegna"
 
 #. module: rma
+#: model:ir.model.fields,field_description:rma.field_stock_return_picking_line__rma_operation_id
+msgid "Operation"
+msgstr ""
+
+#. module: rma
 #: model:ir.model.fields,help:rma.field_rma_team__alias_force_thread_id
 msgid ""
 "Optional ID of a thread (record) to which all incoming messages will be "
@@ -1350,6 +1374,11 @@ msgid "Priority"
 msgstr "Priorità"
 
 #. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.rma_view_search
+msgid "Processed"
+msgstr ""
+
+#. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma__procurement_group_id
 msgid "Procurement group"
 msgstr "Gruppo di approvvigionamento"
@@ -1415,6 +1444,7 @@ msgstr "Quantità da prelevare in un nuovo RMA."
 #: model:ir.model.fields,field_description:rma.field_stock_warehouse__rma
 #: model:ir.module.category,name:rma.rma_module_category
 #: model:ir.ui.menu,name:rma.rma_menu
+#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:rma.view_partner_form
 #: model_terms:ir.ui.view,arch_db:rma.view_picking_form
 msgid "RMA"
@@ -1432,6 +1462,11 @@ msgstr "# RMA"
 #, python-format
 msgid "RMA Code"
 msgstr "Codice RMA"
+
+#. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
+msgid "RMA Confirmation Email"
+msgstr "Email di Conferma RMA"
 
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.rma_view_search
@@ -1493,6 +1528,11 @@ msgid "RMA Location"
 msgstr "Ubicazione RMA"
 
 #. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
+msgid "RMA Manual Finalization"
+msgstr "Chiusura manuale RMA"
+
+#. module: rma
 #: model:mail.message.subtype,name:rma.mt_rma_notification
 #: model:mail.message.subtype,name:rma.mt_rma_team_rma_notification
 #: model:mail.template,name:rma.mail_template_rma_notification
@@ -1515,6 +1555,11 @@ msgstr "Ordini RMA"
 #: model:ir.model.fields,field_description:rma.field_stock_warehouse__rma_out_type_id
 msgid "RMA Out Type"
 msgstr "Tipo RMA in uscita"
+
+#. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
+msgid "RMA Receipt Confirmation Email"
+msgstr "E-mail di conferma ricevuta RMA"
 
 #. module: rma
 #: model:mail.template,name:rma.mail_template_rma_receipt_notification
@@ -1575,6 +1620,11 @@ msgstr "Notifiche automatiche ai clienti RMA"
 #: model:ir.model.fields,field_description:rma.field_stock_picking__rma_count
 msgid "RMA count"
 msgstr "Conteggio RMA"
+
+#. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
+msgid "RMA draft notification Email"
+msgstr "E-mail di notifica bozza RMA"
 
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_stock_warehouse__rma_in_route_id
@@ -1759,6 +1809,7 @@ msgstr "Rendicontazione"
 
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma__operation_id
+#: model:ir.model.fields,field_description:rma.field_stock_return_picking__rma_operation_id
 #: model_terms:ir.ui.view,arch_db:rma.report_rma_document
 msgid "Requested operation"
 msgstr "Operazione richiesta"
@@ -1785,6 +1836,11 @@ msgstr "Utente responsabile"
 #: model:ir.model.fields,field_description:rma.field_stock_return_picking__location_id
 msgid "Return Location"
 msgstr "Ubicazione di reso"
+
+#. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
+msgid "Return Merchandise Authorization Management"
+msgstr ""
 
 #. module: rma
 #: model:ir.model,name:rma.model_stock_return_picking
@@ -1923,6 +1979,12 @@ msgstr "Sequenza RMA in uscita"
 #: model_terms:ir.ui.view,arch_db:rma.rma_view_form
 msgid "Set to draft"
 msgstr "Imposta a bozza"
+
+#. module: rma
+#: model:ir.actions.act_window,name:rma.action_rma_config_settings
+#: model:ir.ui.menu,name:rma.menu_rma_general_settings
+msgid "Settings"
+msgstr ""
 
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.rma_view_form
@@ -2193,11 +2255,6 @@ msgid "User: Own Documents Only"
 msgstr "Utente: solo i propri documenti"
 
 #. module: rma
-#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
-msgid "Values set here are company-specific."
-msgstr "I valori impostati qui sono specifici per azienda."
-
-#. module: rma
 #: model:ir.model.fields.selection,name:rma.selection__rma__state__waiting_replacement
 msgid "Waiting for replacement"
 msgstr "In attesa di sostituzione"
@@ -2249,11 +2306,9 @@ msgstr "Quando l'RMA è confermato, inviare un'e-mail informativa automatica."
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
 msgid ""
-"When the RMA is receive, allow to finsish it manually choosing a "
-"finalization reason."
+"When the RMA is receive, allow to finsish it manually choosing\n"
+"                                    a finalization reason."
 msgstr ""
-"Quando si riceve l'RMA, consente di chiuderlo manualmente scegliendo un "
-"motivo per la chiusura."
 
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
@@ -2340,6 +2395,16 @@ msgstr ""
 "{{object.company_id.name}} La vostra RMA è stata creata con successo (rif. "
 "{{object.name or 'n/a' }})"
 
+#~ msgid "Values set here are company-specific."
+#~ msgstr "I valori impostati qui sono specifici per azienda."
+
+#~ msgid ""
+#~ "When the RMA is receive, allow to finsish it manually choosing a "
+#~ "finalization reason."
+#~ msgstr ""
+#~ "Quando si riceve l'RMA, consente di chiuderlo manualmente scegliendo un "
+#~ "motivo per la chiusura."
+
 #~ msgid "<strong>Delivered qty:</strong>"
 #~ msgstr "<strong>Quantità consegnata:</strong>"
 
@@ -2358,13 +2423,6 @@ msgstr ""
 #~ msgid "SMS Delivery error"
 #~ msgstr "Errore consegna SMS"
 
-#~ msgid ""
-#~ "<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are "
-#~ "company-specific.\" groups=\"base.group_multi_company\"/>"
-#~ msgstr ""
-#~ "<span class=\"fa fa-lg fa-building-o\" title=\"I valori impostati qui "
-#~ "sono specifici per azienda.\" groups=\"base.group_multi_company\"/>"
-
 #~ msgid "Alias domain"
 #~ msgstr "Dominio alias"
 
@@ -2379,18 +2437,6 @@ msgstr ""
 
 #~ msgid "Owner"
 #~ msgstr "Proprietario"
-
-#~ msgid "RMA Confirmation Email"
-#~ msgstr "Email di Conferma RMA"
-
-#~ msgid "RMA Manual Finalization"
-#~ msgstr "Chiusura manuale RMA"
-
-#~ msgid "RMA Receipt Confirmation Email"
-#~ msgstr "E-mail di conferma ricevuta RMA"
-
-#~ msgid "RMA draft notification Email"
-#~ msgstr "E-mail di notifica bozza RMA"
 
 #~ msgid "Remaining delivered qty to done"
 #~ msgstr "Quantità consegnata rimanente da fare"

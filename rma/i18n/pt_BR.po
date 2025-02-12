@@ -236,6 +236,13 @@ msgid ""
 msgstr ""
 
 #. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
+msgid ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" groups=\"base.group_multi_company\"/>"
+msgstr ""
+
+#. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.portal_rma_page
 msgid "<strong class=\"d-block mb-1\">Delivery</strong>"
 msgstr "<strong class=\"d-block mb-1\">Entrega</strong>"
@@ -465,6 +472,11 @@ msgid "Avatar"
 msgstr "Avatar"
 
 #. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.rma_view_search
+msgid "Awaiting Action"
+msgstr ""
+
+#. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma__can_be_finished
 msgid "Can Be Finished"
 msgstr ""
@@ -522,6 +534,11 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:rma.rma_team_action
 msgid "Click to add a new RMA."
 msgstr "Clique para adicionar um novo RMA."
+
+#. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.rma_view_search
+msgid "Closed"
+msgstr ""
 
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma_tag__color
@@ -1139,6 +1156,11 @@ msgid "Number of messages with delivery error"
 msgstr "Número de Mensagens com Erro de Entrega"
 
 #. module: rma
+#: model:ir.model.fields,field_description:rma.field_stock_return_picking_line__rma_operation_id
+msgid "Operation"
+msgstr ""
+
+#. module: rma
 #: model:ir.model.fields,help:rma.field_rma_team__alias_force_thread_id
 msgid ""
 "Optional ID of a thread (record) to which all incoming messages will be "
@@ -1231,6 +1253,11 @@ msgid "Priority"
 msgstr "Prioridade"
 
 #. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.rma_view_search
+msgid "Processed"
+msgstr ""
+
+#. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma__procurement_group_id
 msgid "Procurement group"
 msgstr "Agrupamento de Aquisição"
@@ -1294,6 +1321,7 @@ msgstr "Quantidade a extrair para um novo RMA."
 #: model:ir.model.fields,field_description:rma.field_stock_warehouse__rma
 #: model:ir.module.category,name:rma.rma_module_category
 #: model:ir.ui.menu,name:rma.rma_menu
+#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:rma.view_partner_form
 #: model_terms:ir.ui.view,arch_db:rma.view_picking_form
 msgid "RMA"
@@ -1311,6 +1339,11 @@ msgstr "RMA #"
 #, python-format
 msgid "RMA Code"
 msgstr "Código RMA"
+
+#. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
+msgid "RMA Confirmation Email"
+msgstr ""
 
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.rma_view_search
@@ -1372,6 +1405,11 @@ msgid "RMA Location"
 msgstr "Localização RMA"
 
 #. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
+msgid "RMA Manual Finalization"
+msgstr ""
+
+#. module: rma
 #: model:mail.message.subtype,name:rma.mt_rma_notification
 #: model:mail.message.subtype,name:rma.mt_rma_team_rma_notification
 #: model:mail.template,name:rma.mail_template_rma_notification
@@ -1394,6 +1432,11 @@ msgstr "Pedidos RMA"
 #: model:ir.model.fields,field_description:rma.field_stock_warehouse__rma_out_type_id
 msgid "RMA Out Type"
 msgstr "Tipo Saída RMA"
+
+#. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
+msgid "RMA Receipt Confirmation Email"
+msgstr ""
 
 #. module: rma
 #: model:mail.template,name:rma.mail_template_rma_receipt_notification
@@ -1454,6 +1497,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:rma.field_stock_picking__rma_count
 msgid "RMA count"
 msgstr "Contagem de RMA"
+
+#. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
+msgid "RMA draft notification Email"
+msgstr ""
 
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_stock_warehouse__rma_in_route_id
@@ -1630,6 +1678,7 @@ msgstr "Comunicando"
 
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma__operation_id
+#: model:ir.model.fields,field_description:rma.field_stock_return_picking__rma_operation_id
 #: model_terms:ir.ui.view,arch_db:rma.report_rma_document
 msgid "Requested operation"
 msgstr "Operação Solicitada"
@@ -1655,6 +1704,11 @@ msgstr "Usuário Responsável"
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_stock_return_picking__location_id
 msgid "Return Location"
+msgstr ""
+
+#. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
+msgid "Return Merchandise Authorization Management"
 msgstr ""
 
 #. module: rma
@@ -1791,6 +1845,12 @@ msgstr "Sequência de Saída RMA"
 #: model_terms:ir.ui.view,arch_db:rma.rma_view_form
 msgid "Set to draft"
 msgstr "Marcado como Rascunho"
+
+#. module: rma
+#: model:ir.actions.act_window,name:rma.action_rma_config_settings
+#: model:ir.ui.menu,name:rma.menu_rma_general_settings
+msgid "Settings"
+msgstr ""
 
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.rma_view_form
@@ -2056,11 +2116,6 @@ msgid "User: Own Documents Only"
 msgstr "Usuário: Somente Seus Documentos"
 
 #. module: rma
-#: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
-msgid "Values set here are company-specific."
-msgstr ""
-
-#. module: rma
 #: model:ir.model.fields.selection,name:rma.selection__rma__state__waiting_replacement
 msgid "Waiting for replacement"
 msgstr "Aguardando Substituição"
@@ -2110,8 +2165,8 @@ msgstr ""
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
 msgid ""
-"When the RMA is receive, allow to finsish it manually choosing a "
-"finalization reason."
+"When the RMA is receive, allow to finsish it manually choosing\n"
+"                                    a finalization reason."
 msgstr ""
 
 #. module: rma
