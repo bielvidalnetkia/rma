@@ -384,24 +384,9 @@ msgid "<strong>Deadline</strong>"
 msgstr "<strong>Date limite</strong>"
 
 #. module: rma
-#: model_terms:ir.ui.view,arch_db:rma.report_rma_document
-msgid "<strong>Delivered qty:</strong>"
-msgstr "<strong>Quantité livrée:</strong>"
-
-#. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.portal_rma_page
 msgid "<strong>Delivered quantity</strong>"
 msgstr "<strong>Quantité livrée</strong>"
-
-#. module: rma
-#: model_terms:ir.ui.view,arch_db:rma.report_rma_document
-msgid "<strong>Move:</strong>"
-msgstr "<strong>Déplacer:</strong>"
-
-#. module: rma
-#: model_terms:ir.ui.view,arch_db:rma.report_rma_document
-msgid "<strong>Origin delivery:</strong>"
-msgstr "<strong>livraison Origine:</strong>"
 
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.portal_rma_page
@@ -419,19 +404,9 @@ msgid "<strong>Origin</strong>"
 msgstr "<strong>Origine</strong>"
 
 #. module: rma
-#: model_terms:ir.ui.view,arch_db:rma.report_rma_document
-msgid "<strong>Product:</strong>"
-msgstr "<strong>Produit:</strong>"
-
-#. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.portal_rma_page
 msgid "<strong>Product</strong>"
 msgstr "<strong>Produit</strong>"
-
-#. module: rma
-#: model_terms:ir.ui.view,arch_db:rma.report_rma_document
-msgid "<strong>Quantity:</strong>"
-msgstr "<strong>Quantité:</strong>"
 
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.portal_rma_page
@@ -818,6 +793,11 @@ msgstr "Livrer"
 #: model:ir.model.fields,field_description:rma.field_rma__delivered_qty
 msgid "Delivered Qty"
 msgstr "Qté livrée"
+
+#. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.report_rma_document
+msgid "Delivered Quantity"
+msgstr ""
 
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.rma_view_form
@@ -1300,6 +1280,11 @@ msgid "Origin Delivery"
 msgstr "Livraison de provenance"
 
 #. module: rma
+#: model_terms:ir.ui.view,arch_db:rma.report_rma_document
+msgid "Origin delivery"
+msgstr ""
+
+#. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma__move_id
 msgid "Origin move"
 msgstr "Opération d'origine"
@@ -1365,6 +1350,7 @@ msgstr "Groupe d'approvisionnement"
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma__product_id
 #: model_terms:ir.ui.view,arch_db:rma.portal_my_rmas
+#: model_terms:ir.ui.view,arch_db:rma.report_rma_document
 msgid "Product"
 msgstr "Produit"
 
@@ -1381,6 +1367,7 @@ msgstr "Est public"
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma__product_uom_qty
 #: model_terms:ir.ui.view,arch_db:rma.portal_my_rmas
+#: model_terms:ir.ui.view,arch_db:rma.report_rma_document
 msgid "Quantity"
 msgstr "Quantité"
 
@@ -1766,6 +1753,7 @@ msgstr "Rapport"
 
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma__operation_id
+#: model_terms:ir.ui.view,arch_db:rma.report_rma_document
 msgid "Requested operation"
 msgstr "Opération demandée"
 
@@ -2341,6 +2329,21 @@ msgid ""
 msgstr ""
 "{{object.company_id.name}} Votre RMA a été crée avec succès(Ref {{object."
 "name or 'n/a' }})"
+
+#~ msgid "<strong>Delivered qty:</strong>"
+#~ msgstr "<strong>Quantité livrée:</strong>"
+
+#~ msgid "<strong>Move:</strong>"
+#~ msgstr "<strong>Déplacer:</strong>"
+
+#~ msgid "<strong>Origin delivery:</strong>"
+#~ msgstr "<strong>livraison Origine:</strong>"
+
+#~ msgid "<strong>Product:</strong>"
+#~ msgstr "<strong>Produit:</strong>"
+
+#~ msgid "<strong>Quantity:</strong>"
+#~ msgstr "<strong>Quantité:</strong>"
 
 #~ msgid ""
 #~ "<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are "
