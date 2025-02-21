@@ -39,11 +39,6 @@ msgstr " a été créé"
 
 #. module: rma_sale
 #: model_terms:ir.ui.view,arch_db:rma_sale.sale_rma_request_form
-msgid "&amp;times;"
-msgstr "&amp;times;"
-
-#. module: rma_sale
-#: model_terms:ir.ui.view,arch_db:rma_sale.sale_rma_request_form
 msgid "<i class=\"fa fa-check\"/> Request RMAs"
 msgstr "<i class=\"fa fa-check\"/> Demande RMA"
 
@@ -252,12 +247,6 @@ msgstr ""
 #: model:ir.model,name:rma_sale.model_account_move
 msgid "Journal Entry"
 msgstr "Pièce comptable"
-
-#. module: rma_sale
-#: model:ir.model.fields,field_description:rma_sale.field_sale_order_line_rma_wizard____last_update
-#: model:ir.model.fields,field_description:rma_sale.field_sale_order_rma_wizard____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
 
 #. module: rma_sale
 #: model:ir.model.fields,field_description:rma_sale.field_sale_order_line_rma_wizard__write_uid
@@ -491,3 +480,9 @@ msgid ""
 msgstr ""
 "Vous êtes sur le point d'effectuer une demande RMA. Notre équipe le traitera "
 "et vous parviendra une fois validé. Garde en tête que:"
+
+#~ msgid "&amp;times;"
+#~ msgstr "&amp;times;"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification le"
