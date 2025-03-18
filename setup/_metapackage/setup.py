@@ -12,9 +12,11 @@ setuptools.setup(
         'odoo-addon-rma>=16.0dev,<16.1dev',
         'odoo-addon-rma_lot>=16.0dev,<16.1dev',
         'odoo-addon-rma_procurement_customer>=16.0dev,<16.1dev',
+        'odoo-addon-rma_reason>=16.0dev,<16.1dev',
         'odoo-addon-rma_sale>=16.0dev,<16.1dev',
         'odoo-addon-rma_sale_lot>=16.0dev,<16.1dev',
         'odoo-addon-rma_sale_mrp>=16.0dev,<16.1dev',
+        'odoo-addon-rma_sale_reason>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
