@@ -26,7 +26,7 @@ addon | version | maintainers | summary
 [rma_lot](rma_lot/) | 16.0.1.0.0 |  | Manage lot in RMA
 [rma_procurement_customer](rma_procurement_customer/) | 16.0.1.0.0 |  | Rma Procurement Customer
 [rma_reason](rma_reason/) | 16.0.1.0.1 | [![sbejaoui](https://github.com/sbejaoui.png?size=30px)](https://github.com/sbejaoui) | Rma Reason
-[rma_sale](rma_sale/) | 16.0.3.1.3 | [![chienandalu](https://github.com/chienandalu.png?size=30px)](https://github.com/chienandalu) | Sale Order - Return Merchandise Authorization (RMA)
+[rma_sale](rma_sale/) | 16.0.3.1.4 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) | Sale Order - Return Merchandise Authorization (RMA)
 [rma_sale_lot](rma_sale_lot/) | 16.0.1.0.0 |  | Manage sale returns with lot.
 [rma_sale_mrp](rma_sale_mrp/) | 16.0.2.1.0 | [![chienandalu](https://github.com/chienandalu.png?size=30px)](https://github.com/chienandalu) | Allow doing RMAs from MRP kits
 [rma_sale_reason](rma_sale_reason/) | 16.0.1.0.1 | [![sbejaoui](https://github.com/sbejaoui.png?size=30px)](https://github.com/sbejaoui) | Rma Sale Reason
