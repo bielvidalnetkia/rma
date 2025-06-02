@@ -96,6 +96,11 @@ msgid "Allowed Product"
 msgstr ""
 
 #. module: rma_sale_mrp
+#: model:ir.model.fields,field_description:rma_sale_mrp.field_sale_order_line_rma_wizard_component__allowed_quantity
+msgid "Allowed Quantity"
+msgstr ""
+
+#. module: rma_sale_mrp
 #: model:ir.model.fields,field_description:rma_sale_mrp.field_sale_order_line_rma_wizard_component__uom_category_id
 msgid "Category"
 msgstr ""
