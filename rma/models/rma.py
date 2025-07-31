@@ -878,10 +878,7 @@ class Rma(models.Model):
         self = self.filtered(lambda rma: rma.state == "draft")
         if not self:
             return
-        if not self.procurement_group_id:
-            self.procurement_group_id = self.env["procurement.group"].create(
-                self._prepare_procurement_group_vals()
-            )
+        self._group_reception_if_needed()
         self.write({"state": "confirmed"})
         for rma in self:
             rma._add_message_subscribe_partner()
@@ -1272,6 +1269,26 @@ class Rma(models.Model):
         """Returns a key by which the rmas should be grouped for the delivery process"""
         self.ensure_one()
         return (self.partner_shipping_id.id, self.company_id.id, self.warehouse_id.id)
+
+    def _reception_group_key(self):
+        self.ensure_one()
+        return (self.partner_id.id, self.company_id.id, self.warehouse_id.id)
+
+    def _group_reception_if_needed(self):
+        """Groups the given rmas by the returned key from _reception_group_key
+        by setting the procurement_group_id on the each rma if there is not yet on set"""
+        grouped_rmas = groupby(
+            sorted(self, key=lambda rma: rma._reception_group_key()),
+            key=lambda rma: [rma._reception_group_key()],
+        )
+        for _group, rmas in grouped_rmas:
+            rmas = self.browse().concat(*list(rmas))
+            if not rmas:
+                continue
+            proc_group = self.env["procurement.group"].create(
+                rmas._prepare_procurement_group_vals()
+            )
+            rmas.write({"procurement_group_id": proc_group.id})
 
     def _group_delivery_if_needed(self):
         """Groups the given rmas by the returned key from _delivery_group_key
