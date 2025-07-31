@@ -202,8 +202,8 @@ msgid ""
 "<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" "
 "title=\"Manage\"/>"
 msgstr ""
-"<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Gestione\" title="
-"\"Gestione\"/>"
+"<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Gestione\" "
+"title=\"Gestione\"/>"
 
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.portal_rma_page
@@ -1189,6 +1189,13 @@ msgid "Incoming e-mail"
 msgstr "Email in arrivo"
 
 #. module: rma
+#: model:ir.model.fields,help:rma.field_rma__requires_action
+msgid ""
+"Indicates whether the RMA requires processing such as a receipt,delivery, or "
+"refund."
+msgstr ""
+
+#. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma__partner_invoice_id
 msgid "Invoice Address"
 msgstr "Indirizzo di fatturazione"
@@ -2013,6 +2020,11 @@ msgstr "Operazione richiesta"
 #, python-format
 msgid "Required field(s):%s"
 msgstr "Campi richiesti:%s"
+
+#. module: rma
+#: model:ir.model.fields,field_description:rma.field_rma__requires_action
+msgid "Requires Action"
+msgstr ""
 
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma__user_id
