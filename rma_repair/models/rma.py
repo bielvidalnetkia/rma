@@ -51,6 +51,10 @@ class RMA(models.Model):
                     "default_product_id": self.product_id.id,
                     "default_location_id": self.location_id.id,
                     "default_partner_id": self.partner_id.id,
+                    "default_product_qty": self.product_uom_qty,
+                    "default_product_uom": self.product_uom.id,
+                    "default_address_id": self.partner_invoice_id.id,
+                    "default_picking_id": self.reception_move_id.picking_id.id,
                 },
             }
         )
