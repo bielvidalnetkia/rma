@@ -49,7 +49,9 @@ class RMARepairOrderTest(TransactionCase):
 
     def test_rma_repair_order_done(self):
         self.rma.action_confirm()
-        self.rma.reception_move_id.picking_id.button_validate()
+        self.rma.reception_move_id.quantity_done = self.rma.product_uom_qty
+        self.rma.reception_move_id.picking_id._action_done()
+        self.repair_order.action_repair_confirm()
         self.repair_order.action_repair_start()
         self.repair_order.action_repair_end()
         self.assertTrue(self.rma.can_be_returned)
@@ -58,7 +60,9 @@ class RMARepairOrderTest(TransactionCase):
 
     def test_rma_repair_order_cancel(self):
         self.rma.action_confirm()
-        self.rma.reception_move_id.picking_id.button_validate()
+        self.rma.reception_move_id.quantity_done = self.rma.product_uom_qty
+        self.rma.reception_move_id.picking_id._action_done()
+        self.repair_order.action_repair_confirm()
         self.repair_order.action_repair_start()
         self.repair_order.action_repair_cancel()
         self.assertFalse(self.rma.can_be_returned)

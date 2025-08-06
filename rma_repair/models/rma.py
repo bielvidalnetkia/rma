@@ -38,22 +38,21 @@ class RMA(models.Model):
 
     def action_create_repair_order(self):
         self.ensure_one()
-        action = self.env["ir.actions.act_window"]._for_xml_id(
-            "repair.action_repair_order_form"
-        )
-        action.update(
-            {
-                "view_mode": "form",
-                "views": [(False, "form")],
-                "name": _("Create Repair Order"),
-                "context": {
-                    "default_rma_ids": [self.id],
-                    "default_product_id": self.product_id.id,
-                    "default_location_id": self.location_id.id,
-                    "default_partner_id": self.partner_id.id,
-                },
-            }
-        )
+
+        action = {
+            "type": "ir.actions.act_window",
+            "view_mode": "form",
+            "views": [(False, "form")],
+            "name": _("Create Repair Order"),
+            "res_model": "repair.order",
+            "context": {
+                "default_rma_ids": [self.id],
+                "default_product_id": self.product_id.id,
+                "default_location_id": self.location_id.id,
+                "default_partner_id": self.partner_id.id,
+            },
+        }
+
         if self.lot_id:
             action["context"]["default_lot_id"] = self.lot_id.id
         return action
