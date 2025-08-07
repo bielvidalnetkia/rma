@@ -73,9 +73,13 @@ Authors
 Contributors
 ------------
 
-- `APSL-Nagarro <https://www.apsl.tech>`__:
+-  `APSL-Nagarro <https://www.apsl.tech>`__:
 
-  - Antoni Marroig <amarroig@apsl.net>
+   -  Antoni Marroig <amarroig@apsl.net>
+
+-  `ACSONE SA/NV <https://acsone.eu>`__:
+
+   -  Souheil Bejaoui <souheil.bejaoui@acsone.eu>
 
 Maintainers
 -----------
