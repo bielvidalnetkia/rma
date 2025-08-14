@@ -8,7 +8,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/rma",
-    "depends": ["rma_lot"],
+    "depends": ["rma_lot", "product_expiry"],
     "maintainers": ["sbejaoui"],
     "data": ["views/rma_operation.xml", "data/ir_sequence_data.xml"],
     "demo": [],

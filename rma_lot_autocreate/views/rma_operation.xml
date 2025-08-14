@@ -16,6 +16,14 @@
                         name="lot_sequence_id"
                         attrs="{'required': [('auto_create_lot', '=', True)], 'invisible': [('auto_create_lot', '=', False)]}"
                     />
+                    <field
+                        name="lot_expiration_days"
+                        attrs="{'invisible':[('auto_create_lot','=',False)]}"
+                    />
+                    <field
+                        name="lot_removal_days_before_expiration"
+                        attrs="{'invisible':['|', ('auto_create_lot','=',False), ('lot_expiration_days', '=', 0)],}"
+                    />
                 </group>
             </xpath>
         </field>

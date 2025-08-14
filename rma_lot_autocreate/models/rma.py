@@ -1,7 +1,9 @@
 # Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from dateutil.relativedelta import relativedelta
+
+from odoo import fields, models
 
 
 class Rma(models.Model):
@@ -14,11 +16,25 @@ class Rma(models.Model):
         return super().action_confirm()
 
     def _prepare_rma_lot_vals(self):
-        return {
+        self.ensure_one()
+        vals = {
             "name": self.operation_id.lot_sequence_id.next_by_id(),
             "product_id": self.product_id.id,
             "company_id": self.company_id.id,
         }
+        if (
+            self.product_id.use_expiration_date
+            and self.operation_id.lot_expiration_days
+        ):
+            expiration_date = fields.Date.context_today(self) + relativedelta(
+                days=self.operation_id.lot_expiration_days
+            )
+            removal_date = expiration_date - relativedelta(
+                days=self.operation_id.lot_removal_days_before_expiration
+            )
+            vals["expiration_date"] = expiration_date
+            vals["removal_date"] = removal_date
+        return vals
 
     def _auto_create_lot_if_needed(self):
         self.ensure_one()

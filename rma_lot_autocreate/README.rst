@@ -62,6 +62,10 @@ Configuration
    -  Enable **Auto-create Lot/Serial on Confirm**
    -  Select the **Lot/Serial Name Sequence** to use for generated lots
 
+Optionally set Removal Days Before Expiration to automatically compute
+the lot’s Removal Date as Expiration minus N days. Requires a positive
+Lot Expiration (days).
+
 Usage
 =====
 
@@ -77,6 +81,9 @@ Usage
    -  The system will generate a new stock lot using the defined
       sequence
    -  The lot will be linked to the RMA
+
+If configured, the lot will receive Expiration and Removal date
+(removal_date = expiration_date − N days).
 
 Bug Tracker
 ===========

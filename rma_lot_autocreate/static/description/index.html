@@ -415,6 +415,9 @@ before it enters your warehouse workflow.</p>
 </ul>
 </li>
 </ol>
+<p>Optionally set Removal Days Before Expiration to automatically compute
+the lot’s Removal Date as Expiration minus N days. Requires a positive
+Lot Expiration (days).</p>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-3">Usage</a></h1>
@@ -433,6 +436,8 @@ sequence</li>
 </ul>
 </li>
 </ol>
+<p>If configured, the lot will receive Expiration and Removal date
+(removal_date = expiration_date − N days).</p>
 </div>
 <div class="section" id="bug-tracker">
 <h1><a class="toc-backref" href="#toc-entry-4">Bug Tracker</a></h1>

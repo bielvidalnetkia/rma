@@ -1,6 +1,9 @@
 # Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from dateutil.relativedelta import relativedelta
+
+from odoo import fields
 from odoo.exceptions import ValidationError
 from odoo.tests.common import Form
 
@@ -11,15 +14,15 @@ class TestRmaLotAutocreate(TestRma):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.operation.lot_sequence_id = cls.env.ref(
-            "rma_lot_autocreate.seq_rma_lot_number"
-        )
+        cls.op_lot_seq = cls.env.ref("rma_lot_autocreate.seq_rma_lot_number")
+        cls.operation.lot_sequence_id = cls.op_lot_seq
         cls.operation.auto_create_lot = True
         cls.product_tracked_lot = cls.env["product.product"].create(
             {
                 "name": "Tracked by lot",
                 "type": "product",
                 "tracking": "lot",
+                "use_expiration_date": True,
             }
         )
         cls.product_tracked_serial = cls.env["product.product"].create(
@@ -92,3 +95,111 @@ class TestRmaLotAutocreate(TestRma):
             "You must set a Lot/Serial Name Sequence.*",
         ):
             self.env["rma.operation"].create({"name": "op 2", "auto_create_lot": True})
+
+    def test_removal_relative_to_expiration(self):
+        """removal_date = expiration_date - N days when both are configured."""
+        today = fields.Date.context_today(self.env.user)
+        op = self.env["rma.operation"].create(
+            {
+                "name": "Exp + removal",
+                "auto_create_lot": True,
+                "lot_sequence_id": self.op_lot_seq.id,
+                "lot_expiration_days": 90,
+                "lot_removal_days_before_expiration": 15,
+            }
+        )
+        rma = self._create_rma(self.partner, self.product_tracked_lot, operation=op)
+        rma.action_confirm()
+        self.assertTrue(rma.lot_id)
+        expected_expiration = today + relativedelta(days=90)
+        expected_removal = expected_expiration - relativedelta(days=15)
+        self.assertEqual(rma.lot_id.expiration_date.date(), expected_expiration)
+        self.assertEqual(rma.lot_id.removal_date.date(), expected_removal)
+
+    def test_removal_requires_expiration(self):
+        """Configuring a before-expiration removal without positive expiration should fail."""
+        with self.assertRaisesRegexp(
+            ValidationError,
+            "To set a removal date before expiration, you must configure a positive expiration",
+        ):
+            self.env["rma.operation"].create(
+                {
+                    "name": "Removal but no exp",
+                    "auto_create_lot": True,
+                    "lot_sequence_id": self.op_lot_seq.id,
+                    "lot_removal_days_before_expiration": 10,
+                    # lot_expiration_days missing/zero
+                }
+            )
+        op = self.env["rma.operation"].create(
+            {
+                "name": "Zero exp invalid",
+                "auto_create_lot": True,
+                "lot_sequence_id": self.op_lot_seq.id,
+                "lot_expiration_days": 0,
+            }
+        )
+        with self.assertRaisesRegexp(
+            ValidationError,
+            "To set a removal date before expiration, you must configure a positive expiration",
+        ):
+            op.write({"lot_removal_days_before_expiration": 5})
+
+    def test_negative_removal_not_allowed(self):
+        with self.assertRaisesRegexp(
+            ValidationError, "Expiration days must be greater than or equal to 0."
+        ):
+            self.env["rma.operation"].create(
+                {
+                    "name": "Invalid expiration",
+                    "auto_create_lot": True,
+                    "lot_sequence_id": self.op_lot_seq.id,
+                    "lot_expiration_days": -30,
+                }
+            )
+        with self.assertRaisesRegexp(
+            ValidationError,
+            "Removal days before expiration must be greater than or equal to 0.",
+        ):
+            self.env["rma.operation"].create(
+                {
+                    "name": "Invalid removal",
+                    "auto_create_lot": True,
+                    "lot_sequence_id": self.op_lot_seq.id,
+                    "lot_expiration_days": 30,
+                    "lot_removal_days_before_expiration": -1,
+                }
+            )
+
+    def test_no_removal_when_not_configured(self):
+        today = fields.Date.context_today(self.env.user)
+        op = self.env["rma.operation"].create(
+            {
+                "name": "Only expiration",
+                "auto_create_lot": True,
+                "lot_sequence_id": self.op_lot_seq.id,
+                "lot_expiration_days": 30,
+            }
+        )
+        rma = self._create_rma(self.partner, self.product_tracked_lot, operation=op)
+        rma.action_confirm()
+        self.assertTrue(rma.lot_id)
+        expected_expiration = today + relativedelta(days=30)
+        self.assertEqual(rma.lot_id.expiration_date.date(), expected_expiration)
+        self.assertEqual(rma.lot_id.removal_date.date(), expected_expiration)
+
+    def test_product_no_use_expiration_date(self):
+        self.product_tracked_lot.use_expiration_date = False
+        op = self.env["rma.operation"].create(
+            {
+                "name": "Only expiration",
+                "auto_create_lot": True,
+                "lot_sequence_id": self.op_lot_seq.id,
+                "lot_expiration_days": 30,
+            }
+        )
+        rma = self._create_rma(self.partner, self.product_tracked_lot, operation=op)
+        rma.action_confirm()
+        self.assertTrue(rma.lot_id)
+        self.assertFalse(rma.lot_id.expiration_date)
+        self.assertFalse(rma.lot_id.removal_date)
