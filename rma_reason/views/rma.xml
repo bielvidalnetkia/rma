@@ -10,10 +10,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='operation_id']" position="before">
                 <field name="is_rma_reason_required" invisible="True" />
-                <field
-                    name="reason_id"
-                    attrs="{'required': [('is_rma_reason_required', '=', True)]}"
-                />
+                <field name="reason_id" required="is_rma_reason_required" />
             </xpath>
             <xpath expr="//field[@name='operation_id']" position="after">
                 <field name="operation_domain" invisible="1" />
