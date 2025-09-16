@@ -4,7 +4,6 @@
      Copyright 2024 ACSONE SA/NV
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.model.access" id="rma_reason_access_rma_user">
         <field name="name">rma.reason access rma user</field>
         <field name="model_id" ref="model_rma_reason" />

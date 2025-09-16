@@ -7,7 +7,6 @@ from odoo import fields, models
 
 
 class ResCompany(models.Model):
-
     _inherit = "res.company"
 
     is_rma_reason_required = fields.Boolean(

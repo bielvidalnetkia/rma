@@ -7,7 +7,6 @@ from odoo import fields, models
 
 
 class RmaReason(models.Model):
-
     _name = "rma.reason"
     _description = "Rma Reason"
 

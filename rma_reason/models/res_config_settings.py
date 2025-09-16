@@ -7,7 +7,6 @@ from odoo import fields, models
 
 
 class ResConfigSettings(models.TransientModel):
-
     _inherit = "res.config.settings"
 
     is_rma_reason_required = fields.Boolean(

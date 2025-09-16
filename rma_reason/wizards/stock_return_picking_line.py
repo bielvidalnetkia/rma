@@ -5,7 +5,6 @@ from odoo import api, fields, models
 
 
 class StockReturnPickingLine(models.TransientModel):
-
     _inherit = "stock.return.picking.line"
 
     rma_reason_id = fields.Many2one(

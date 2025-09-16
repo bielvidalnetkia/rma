@@ -4,7 +4,6 @@
      Copyright 2024 ACSONE SA/NV
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-
     <record model="rma.reason" id="rma_reason_defective_product">
         <field name="name">Defective Product</field>
         <field
@@ -39,5 +38,4 @@
             name="description"
         >The item does not match the description or specifications provided by the seller, leading to customer dissatisfaction.</field>
     </record>
-
 </odoo>

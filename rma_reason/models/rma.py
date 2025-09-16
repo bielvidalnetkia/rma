@@ -7,7 +7,6 @@ from odoo import api, fields, models
 
 
 class Rma(models.Model):
-
     _inherit = "rma"
 
     reason_id = fields.Many2one(comodel_name="rma.reason")
