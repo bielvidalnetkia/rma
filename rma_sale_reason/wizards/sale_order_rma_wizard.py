@@ -5,7 +5,6 @@ from odoo import api, fields, models
 
 
 class SaleOrderRmaWizard(models.TransientModel):
-
     _inherit = "sale.order.rma.wizard"
 
     reason_id = fields.Many2one(comodel_name="rma.reason")

@@ -7,7 +7,6 @@ from odoo import api, fields, models
 
 
 class SaleOrderLineRmaWizard(models.TransientModel):
-
     _inherit = "sale.order.line.rma.wizard"
 
     reason_id = fields.Many2one(
