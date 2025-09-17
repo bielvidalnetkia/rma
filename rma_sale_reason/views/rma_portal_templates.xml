@@ -16,10 +16,10 @@
                 t-att-value="'1' if sale_order.company_id.is_rma_reason_required else '0'"
             />
         </xpath>
-        <xpath expr="//th[@name='operation']" position="before">
+        <xpath expr="//th[@name='th_operation']" position="before">
             <th class="text-start">Reason</th>
         </xpath>
-        <xpath expr="//td[@name='operation']" position="before">
+        <xpath expr="//td[@name='td_operation']" position="before">
             <td class="text-start">
                 <select
                     t-attf-name="#{data_index}-reason_id"

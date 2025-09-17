@@ -5,7 +5,7 @@
 
 {
     "name": "Rma Sale Reason",
-    "version": "16.0.1.1.0",
+    "version": "18.0.1.0.0",
     "license": "AGPL-3",
     "author": "Raumschmiede GmbH,BCIM,ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/rma",
@@ -18,10 +18,10 @@
     "demo": [],
     "assets": {
         "web.assets_frontend": [
-            "/rma_sale_reason/static/src/js/rma_portal_form.js",
+            "/rma_sale_reason/static/src/js/rma_portal_form.esm.js",
         ],
         "web.assets_tests": [
-            "/rma_sale_reason/static/src/tests/*.js",
+            "rma_sale_reason/static/src/tests/test_rma_sale_portal_tour.esm.js",
         ],
     },
 }

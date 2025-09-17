@@ -15,13 +15,13 @@ class TestRmaSaleReason(TestRmaSaleBase):
         super().setUpClass()
         cls.rma_reason = cls.env.ref("rma_reason.rma_reason_defective_product")
         cls.operation = cls.rma_operation_model.sudo().search([], limit=1)
-        cls.sale_order = cls._create_sale_order(cls, [[cls.product_1, 5]])
+        cls.sale_order = cls._create_sale_order([[cls.product_1, 5]])
         cls.sale_order.action_confirm()
         cls.order_line = cls.sale_order.order_line.filtered(
             lambda r: r.product_id == cls.product_1
         )
         cls.order_out_picking = cls.sale_order.picking_ids
-        cls.order_out_picking.move_ids.quantity_done = 5
+        cls.order_out_picking.move_ids.quantity = 5
         cls.order_out_picking.button_validate()
 
     def _create_wizard(self):
