@@ -4,6 +4,7 @@
 # Copyright 2025 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import logging
+import warnings
 from collections import defaultdict
 from itertools import groupby
 
@@ -668,6 +669,7 @@ class Rma(models.Model):
         self = self.filtered(lambda rma: rma.state == "draft")
         if not self:
             return
+        self._assign_reception_procurement_group()
         procurements = self._prepare_reception_procurements()
         if procurements:
             self.env["procurement.group"].run(procurements)
@@ -1029,32 +1031,50 @@ class Rma(models.Model):
 
     def _delivery_should_be_grouped(self):
         """Checks if the rmas should be grouped for the delivery process"""
-        group_returns = self.env.company.rma_return_grouping
+        if any(self.operation_id.mapped("prevent_delivery_grouping")):
+            return False
         if "rma_return_grouping" in self.env.context:
-            group_returns = self.env.context.get("rma_return_grouping")
-        return group_returns
+            return bool(self.env.context.get("rma_return_grouping"))
+        return self.env.company.rma_return_grouping
 
-    def _delivery_group_key(self):
+    def _get_delivery_group_key(self):
         """Returns a key by which the rmas should be grouped for the delivery process"""
         self.ensure_one()
         return (self.partner_shipping_id.id, self.company_id.id, self.warehouse_id.id)
 
-    def _group_delivery_if_needed(self):
-        """Groups the given rmas by the returned key from _delivery_group_key
+    def _get_reception_group_key(self):
+        self.ensure_one()
+        return (self.partner_id.id, self.company_id.id, self.warehouse_id.id)
+
+    def _assign_reception_procurement_group(self):
+        """Groups the given rmas by the returned key from _get_reception_group_key
+        by setting the procurement_group_id on the each rma if there is not yet on
+         set"""
+        grouped_rmas = groupby(
+            sorted(self, key=lambda rma: rma._get_reception_group_key()),
+            key=lambda rma: [rma._get_reception_group_key()],
+        )
+        for _group, rmas in grouped_rmas:
+            rmas = self.browse().concat(*list(rmas))
+            if not rmas:
+                continue
+            proc_group = self.env["procurement.group"].create(
+                rmas._prepare_procurement_group_vals()
+            )
+            rmas.write({"procurement_group_id": proc_group.id})
+
+    def _assign_delivery_procurement_group(self):
+        """Groups the given rmas by the returned key from _get_delivery_group_key
         by setting the procurement_group_id on the each rma if there is not yet on
         set"""
         if not self._delivery_should_be_grouped():
             return
         grouped_rmas = groupby(
-            sorted(self, key=lambda rma: rma._delivery_group_key()),
-            key=lambda rma: [rma._delivery_group_key()],
+            sorted(self, key=lambda rma: rma._get_delivery_group_key()),
+            key=lambda rma: [rma._get_delivery_group_key()],
         )
         for _group, rmas in grouped_rmas:
-            rmas = (
-                self.browse()
-                .concat(*list(rmas))
-                .filtered(lambda rma: not rma.procurement_group_id)
-            )
+            rmas = self.browse().concat(*list(rmas))
             if not rmas:
                 continue
             proc_group = self.env["procurement.group"].create(
@@ -1072,7 +1092,7 @@ class Rma(models.Model):
         return vals
 
     def _prepare_delivery_procurements(self, scheduled_date=None, qty=None, uom=None):
-        self._group_delivery_if_needed()
+        self._assign_delivery_procurement_group()
         procurements = []
         group_model = self.env["procurement.group"]
         for rma in self:
@@ -1348,3 +1368,21 @@ class Rma(models.Model):
         )
         if rma:
             rma.write({"state": "returned"})
+
+    def _delivery_group_key(self):
+        warnings.warn(
+            "_delivery_group_key is deprecated and will be removed in the future. "
+            "Use _get_delivery_group_key instead",
+            category=DeprecationWarning,
+            stacklevel=2,
+        )
+        return self._get_delivery_group_key()
+
+    def _group_delivery_if_needed(self):
+        warnings.warn(
+            "_group_delivery_if_needed is deprecated and will be removed in the"
+            " future. Use _assign_delivery_procurement_group instead",
+            category=DeprecationWarning,
+            stacklevel=2,
+        )
+        return self._assign_delivery_procurement_group()
