@@ -4,45 +4,105 @@
 <odoo>
 
     <record id="rma_operation_kanban" model="ir.ui.view">
-        <field name="model">rma.operation</field>
-        <field name="arch" type="xml">
-            <kanban
-                class="oe_background_grey o_kanban_dashboard o_emphasize_colors"
+    <field name="model">rma.operation</field>
+    <field name="arch" type="xml">
+        <kanban
+                class="o_kanban_dashboard"
                 create="0"
                 group_create="false"
+                highlight_color="color"
             >
                 <field name="color" />
                 <field name="count_rma_draft" />
                 <field name="count_rma_awaiting_action" />
                 <field name="count_rma_processed" />
                 <templates>
+                    <t t-name="kanban-menu" t-if="!selection_mode">
+                        <div class="container">
+                            <div class="row">
+                                <div
+                                    class="col-6 o_kanban_card_manage_section o_kanban_manage_new"
+                                >
+                                    <h5
+                                        role="menuitem"
+                                        class="o_kanban_card_manage_title"
+                                    >New</h5>
+                                    <div role="menuitem">
+                                        <a
+                                            name="%(action_rma_form)d"
+                                            type="action"
+                                        >RMA</a>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="col-6 o_kanban_card_manage_section o_kanban_manage_view"
+                                >
+                                    <h5
+                                        role="menuitem"
+                                        class="o_kanban_card_manage_title"
+                                    >View</h5>
+                                    <div role="menuitem">
+                                        <a
+                                            name="get_action_rma_tree_draft"
+                                            type="object"
+                                        >Draft</a>
+                                    </div>
+                                    <div role="menuitem">
+                                        <a
+                                            name="get_action_rma_tree_awaiting_action"
+                                            type="object"
+                                        >Awaiting action</a>
+                                    </div>
+                                    <div role="menuitem">
+                                        <a
+                                            name="get_action_rma_tree_processed"
+                                            type="object"
+                                        >Processed</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                t-if="widget.editable"
+                                class="o_kanban_card_manage_settings row mt-2"
+                            >
+                                <div class="col-8" role="menuitem" aria-haspopup="true">
+                                    <ul
+                                        class="oe_kanban_colorpicker"
+                                        data-field="color"
+                                        role="menu"
+                                    />
+                                </div>
+                                <div role="menuitem" class="col-4">
+                                    <a
+                                        class="dropdown-item"
+                                        role="menuitem"
+                                        type="edit"
+                                    >Configuration</a>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+
                     <t t-name="kanban-box">
                         <div
-                            t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''}"
+                            t-attf-class="o_kanban_card #{kanban_color(record.color.raw_value)}"
                             name="rma_operation"
                         >
-                            <div t-attf-class="o_kanban_card_header">
-                                <div class="o_kanban_card_header_title">
-                                    <div class="o_primary" t-if="!selection_mode">
-                                        <a type="object" name="get_action_all_rma">
-                                            <field name="name" />
-                                        </a>
-                                    </div>
-                                    <div class="o_primary" t-if="selection_mode">
-                                        <field name="name" />
-                                    </div>
-                                </div>
-                                <div
-                                    class="o_kanban_manage_button_section"
-                                    t-if="!selection_mode"
-                                >
-                                    <a class="o_kanban_manage_toggle_button" href="#"><i
-                                            class="fa fa-ellipsis-v"
-                                            role="img"
-                                            aria-label="Manage"
-                                            title="Manage"
-                                        /></a>
-                                </div>
+                        <div
+                                class="o_kanban_card_header d-flex justify-content-between align-items-center"
+                            >
+                            <h5 class="o_kanban_card_title mb-0">
+                                <a
+                                        t-if="!selection_mode"
+                                        type="object"
+                                        name="get_action_all_rma"
+                                    >
+                                    <field name="name" />
+                                </a>
+                                <field t-if="selection_mode" name="name" />
+                            </h5>
                             </div>
                             <div
                                 class="container o_kanban_card_content"
@@ -58,7 +118,7 @@
                                             <span>Draft</span>
                                         </button>
                                     </div>
-                                    <div class="col-3 o_kanban_primary_right">
+                                    <div class="col-3 o_kanban_primary_right text-end">
                                         <button
                                             class="btn btn-link"
                                             name="get_action_rma_tree_draft"
@@ -78,7 +138,7 @@
                                             <span>Awaiting action</span>
                                         </button>
                                     </div>
-                                    <div class="col-3 o_kanban_primary_right">
+                                    <div class="col-3 o_kanban_primary_right text-end">
                                         <button
                                             class="btn btn-link"
                                             name="get_action_rma_tree_awaiting_action"
@@ -98,7 +158,7 @@
                                             <span>Processed</span>
                                         </button>
                                     </div>
-                                    <div class="col-3 o_kanban_primary_right">
+                                    <div class="col-3 o_kanban_primary_right text-end">
                                         <button
                                             class="btn btn-link"
                                             name="get_action_rma_tree_processed"
@@ -111,59 +171,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                class="container o_kanban_card_manage_pane dropdown-menu"
-                                role="menu"
-                            >
-                                <div class="row">
-                                    <div
-                                        class="col-6 o_kanban_card_manage_section o_kanban_manage_new"
-                                    >
-                                        <div
-                                            role="menuitem"
-                                            class="o_kanban_card_manage_title"
-                                        >
-                                            <span>New</span>
-                                        </div>
-                                        <div role="menuitem">
-                                            <a
-                                                name="%(action_rma_form)d"
-                                                type="action"
-                                            >RMA</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div
-                                    t-if="widget.editable"
-                                    class="o_kanban_card_manage_settings row"
-                                >
-                                    <div
-                                        class="col-8"
-                                        role="menuitem"
-                                        aria-haspopup="true"
-                                    >
-                                        <ul
-                                            class="oe_kanban_colorpicker"
-                                            data-field="color"
-                                            role="menu"
-                                        />
-                                    </div>
-                                    <div role="menuitem" class="col-4">
-                                        <a
-                                            class="dropdown-item"
-                                            role="menuitem"
-                                            type="edit"
-                                        >Configuration</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </t>
-                </templates>
-            </kanban>
-        </field>
-    </record>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
 
     <record id="rma_dashboard_action" model="ir.actions.act_window">
         <field name="name">RMA Overview</field>
