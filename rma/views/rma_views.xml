@@ -406,6 +406,9 @@
                     <field name="sent" invisible="1" />
                     <field name="reception_move_id" invisible="1" />
                     <field name="refund_id" invisible="1" />
+                    <field name="can_be_refunded" invisible="1" />
+                    <field name="can_be_replaced" invisible="1" />
+                    <field name="can_be_returned" invisible="1" />
                     <field name="show_create_receipt" invisible="1" />
                     <field name="show_create_refund" invisible="1" />
                     <field name="show_create_return" invisible="1" />
