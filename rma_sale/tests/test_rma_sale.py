@@ -3,6 +3,7 @@
 # Copyright 2023 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from odoo.exceptions import ValidationError
 from odoo.tests import Form
 from odoo.tests.common import users
 
@@ -251,6 +252,49 @@ class TestRmaSale(TestRmaSaleBase):
         self.assertRegex(res, self.sale_order.name)
         self.assertRegex(res, operation.name)
 
+    def test_manual_refund_no_quantity_impact(self):
+        """If the operation is meant for a manual refund, the delivered quantity
+        should not be updated."""
+        self.operation.action_create_refund = "manual_after_receipt"
+        order = self.sale_order
+        order_line = order.order_line
+        self.assertEqual(order_line.qty_delivered, 5)
+        wizard = self._rma_sale_wizard(order)
+        rma = self.env["rma"].browse(wizard.create_and_open_rma()["res_id"])
+        self.assertFalse(rma.reception_move_id.sale_line_id)
+        rma.action_confirm()
+        rma.reception_move_id._set_quantity_done(rma.product_uom_qty)
+        rma.reception_move_id.picking_id.button_validate()
+        self.assertEqual(order.order_line.qty_delivered, 5)
+
+    def test_no_manual_refund_quantity_impact(self):
+        """If the operation is meant for a manual refund, the delivered quantity
+        should not be updated."""
+        self.operation.action_create_refund = "update_quantity"
+        order = self.sale_order
+        order_line = order.order_line
+        self.assertEqual(order_line.qty_delivered, 5)
+        wizard = self._rma_sale_wizard(order)
+        rma = self.env["rma"].browse(wizard.create_and_open_rma()["res_id"])
+        self.assertEqual(rma.reception_move_id.sale_line_id, order_line)
+        self.assertFalse(rma.can_be_refunded)
+        rma.reception_move_id._set_quantity_done(rma.product_uom_qty)
+        rma.reception_move_id.picking_id.button_validate()
+        self.assertEqual(order.order_line.qty_delivered, 0)
+        delivery_form = Form(
+            self.env["rma.delivery.wizard"].with_context(
+                active_ids=rma.ids,
+                rma_delivery_type="return",
+            )
+        )
+        delivery_form.product_uom_qty = rma.product_uom_qty
+        delivery_wizard = delivery_form.save()
+        delivery_wizard.action_deliver()
+        picking = rma.delivery_move_ids.picking_id
+        picking.move_ids._set_quantity_done(rma.product_uom_qty)
+        picking.button_validate()
+        self.assertEqual(order.order_line.qty_delivered, 5)
+
     def test_grouping_reception(self):
         sale_order = self._create_sale_order([[self.product_1, 5], [self.product_2, 5]])
         sale_order.action_confirm()
@@ -260,3 +304,27 @@ class TestRmaSale(TestRmaSaleBase):
         rmas = self.env["rma"].search(wizard.create_and_open_rma()["domain"])
         self.assertEqual(len(rmas.reception_move_id.group_id), 1)
         self.assertEqual(len(rmas.reception_move_id.picking_id), 1)
+
+    def test_return_different_product(self):
+        self.operation.action_create_delivery = False
+        self.operation.different_return_product = True
+        self.operation.action_create_refund = "update_quantity"
+        order = self.sale_order
+        order_line = order.order_line
+        self.assertEqual(order_line.qty_delivered, 5)
+        wizard = self._rma_sale_wizard(order)
+        with self.assertRaises(
+            ValidationError, msg="Complete the replacement information"
+        ):
+            rma = self.env["rma"].browse(wizard.create_and_open_rma()["res_id"])
+        return_product = self.product_product.create(
+            {"name": "return Product test 1", "type": "product"}
+        )
+        wizard.line_ids.return_product_id = return_product
+        rma = self.env["rma"].browse(wizard.create_and_open_rma()["res_id"])
+        self.assertEqual(rma.reception_move_id.sale_line_id, order_line)
+        self.assertEqual(rma.reception_move_id.product_id, return_product)
+        self.assertFalse(rma.can_be_refunded)
+        rma.reception_move_id._set_quantity_done(rma.product_uom_qty)
+        rma.reception_move_id.picking_id.button_validate()
+        self.assertEqual(order.order_line.qty_delivered, 5)
