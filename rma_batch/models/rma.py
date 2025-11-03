@@ -1,7 +1,8 @@
 # Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class Rma(models.Model):
@@ -41,3 +42,15 @@ class Rma(models.Model):
             if rec.batch_id.team_id:
                 rec.team_id = rec.batch_id.team_id
         return res
+
+    @api.constrains("batch_id", "partner_id")
+    def _check_batch_partner(self):
+        for rec in self:
+            if (
+                rec.batch_id
+                and rec.partner_id
+                and rec.batch_id.partner_id != rec.partner_id
+            ):
+                raise ValidationError(
+                    _("All RMAs in a batch must belong to the same partner")
+                )

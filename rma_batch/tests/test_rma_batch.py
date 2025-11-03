@@ -157,3 +157,18 @@ class TestRmaBatch(TransactionCase):
         rma = reception.move_ids.rma_receiver_ids
         self.assertTrue(rma.batch_id)
         self.assertEqual(rma.batch_id.rma_ids.product_id, self.product + self.product2)
+
+    def test_mix_partner(self):
+        batch = self._create_batch([(self.product, 5), (self.product2, 5)])
+        rma1 = batch.rma_ids[0]
+        rma2 = batch.rma_ids[1]
+        with self.assertRaisesRegex(
+            ValidationError, "All RMAs in a batch must belong to the same partner"
+        ):
+            rma1.partner_id = self.partner2
+        with self.assertRaisesRegex(
+            ValidationError, "All RMAs in a batch must belong to the same partner"
+        ):
+            (rma1 + rma2).partner_id = self.partner2
+        batch.partner_id = self.partner2
+        self.assertEqual((rma1 + rma2).partner_id, self.partner2)
