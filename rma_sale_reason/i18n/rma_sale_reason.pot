@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,7 +20,6 @@ msgstr ""
 
 #. module: rma_sale_reason
 #: model:ir.model.fields,field_description:rma_sale_reason.field_sale_order_line_rma_wizard__is_rma_reason_required
-#: model:ir.model.fields,field_description:rma_sale_reason.field_sale_order_line_rma_wizard_component__is_rma_reason_required
 msgid ""
 "Indicates whether specifying an RMA reason is mandatory when creating an RMA"
 " order."
@@ -28,14 +27,12 @@ msgstr ""
 
 #. module: rma_sale_reason
 #: model:ir.model.fields,field_description:rma_sale_reason.field_sale_order_line_rma_wizard__operation_domain
-#: model:ir.model.fields,field_description:rma_sale_reason.field_sale_order_line_rma_wizard_component__operation_domain
 #: model:ir.model.fields,field_description:rma_sale_reason.field_sale_order_rma_wizard__operation_domain
 msgid "Operation Domain"
 msgstr ""
 
 #. module: rma_sale_reason
 #: model:ir.model.fields,field_description:rma_sale_reason.field_sale_order_line_rma_wizard__reason_id
-#: model:ir.model.fields,field_description:rma_sale_reason.field_sale_order_line_rma_wizard_component__reason_id
 #: model:ir.model.fields,field_description:rma_sale_reason.field_sale_order_rma_wizard__reason_id
 #: model_terms:ir.ui.view,arch_db:rma_sale_reason.sale_rma_request_form
 msgid "Reason"
