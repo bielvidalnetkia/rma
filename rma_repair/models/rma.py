@@ -59,7 +59,7 @@ class RMA(models.Model):
 
     def _get_repair_order_default_vals(self):
         self.ensure_one()
-        vals = {
+        return {
             "default_rma_ids": [self.id],
             "default_product_id": self.product_id.id,
             "default_location_id": self.location_id.id,
@@ -70,9 +70,6 @@ class RMA(models.Model):
             "default_partner_invoice_id": self.partner_invoice_id.id,
             "default_picking_id": self.reception_move_id.picking_id.id,
         }
-        if self.lot_id:
-            vals["default_lot_id"] = self.lot_id.id
-        return vals
 
     def action_create_repair_order(self):
         self.ensure_one()
@@ -87,8 +84,6 @@ class RMA(models.Model):
                 "context": self._get_repair_order_default_vals(),
             }
         )
-        if self.lot_id:
-            action["context"]["default_lot_id"] = self.lot_id.id
         return action
 
     def action_view_rma_repair_order(self):

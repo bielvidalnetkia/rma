@@ -1,8 +1,7 @@
 # Copyright 2024 APSL-Nagarro Antoni Marroig
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
-    "name": "RMA Repair",
-    "summary": "Create a repair order from rma",
+    "name": "RMA Repair Lot",
     "version": "18.0.1.0.0",
     "category": "RMA",
     "website": "https://github.com/OCA/rma",
@@ -11,11 +10,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["rma", "repair"],
-    "data": [
-        "data/rma_operation_data.xml",
-        "views/rma_operation.xml",
-        "views/rma_views.xml",
-        "views/repair_views.xml",
-    ],
+    "auto_install": True,
+    "depends": ["rma_repair", "rma_lot"],
+    "data": [],
 }

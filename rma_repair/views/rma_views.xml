@@ -19,7 +19,6 @@
                 />
             </xpath>
             <xpath expr="//button[@name='action_view_receipt']" position="before">
-                <field name="repair_id" readonly="1" invisible="1" />
                 <button
                     class="oe_stat_button"
                     name="action_view_rma_repair_order"

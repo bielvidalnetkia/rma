@@ -15,9 +15,9 @@ class RepairOrder(models.Model):
 
     def action_view_repair_rma(self):
         return {
-            "name": "RMAs - " + self.name,
+            "name": f"RMAs - {self.name}",
             "type": "ir.actions.act_window",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "rma",
             "domain": [("id", "in", self.rma_ids.ids)],
         }

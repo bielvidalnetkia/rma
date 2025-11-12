@@ -8,7 +8,6 @@
         <field name="inherit_id" ref="repair.view_repair_order_form" />
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_view_sale_order']" position="before">
-                <field name="rma_ids" readonly="1" invisible="1" />
                 <button
                     class="oe_stat_button"
                     name="action_view_repair_rma"
