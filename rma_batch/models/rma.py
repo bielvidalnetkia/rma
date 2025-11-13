@@ -16,22 +16,39 @@ class Rma(models.Model):
     )
     user_id = fields.Many2one(compute="_compute_user_id", store=True, readonly=False)
     tag_ids = fields.Many2many(compute="_compute_tag_ids", store=True, readonly=False)
+    operation_id = fields.Many2one(
+        compute="_compute_operation_id", store=True, readonly=False
+    )
+
+    @api.depends("batch_id.operation_id")
+    def _compute_operation_id(self):
+        for rec in self:
+            if rec.state != "draft":
+                continue
+            if rec.batch_id.operation_id:
+                rec.operation_id = rec.batch_id.operation_id
 
     @api.depends("batch_id.partner_id")
     def _compute_partner_id(self):
         for rec in self:
+            if rec.state != "draft":
+                continue
             if rec.batch_id.partner_id:
                 rec.partner_id = rec.batch_id.partner_id
 
     @api.depends("batch_id.user_id")
     def _compute_user_id(self):
         for rec in self:
+            if rec.state != "draft":
+                continue
             if rec.batch_id.user_id:
                 rec.user_id = rec.batch_id.user_id
 
     @api.depends("batch_id.tag_ids")
     def _compute_tag_ids(self):
         for rec in self:
+            if rec.state != "draft":
+                continue
             if rec.batch_id.tag_ids:
                 rec.tag_ids = rec.batch_id.tag_ids
 
@@ -39,6 +56,8 @@ class Rma(models.Model):
     def _compute_team_id(self):
         res = super()._compute_team_id()
         for rec in self:
+            if rec.state != "draft":
+                continue
             if rec.batch_id.team_id:
                 rec.team_id = rec.batch_id.team_id
         return res

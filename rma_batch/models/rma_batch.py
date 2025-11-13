@@ -85,6 +85,9 @@ class RmaBatch(models.Model):
     )
     rma_ids = fields.One2many("rma", "batch_id", string="RMA")
     count_rma = fields.Integer(compute="_compute_count_rma")
+    operation_id = fields.Many2one(
+        comodel_name="rma.operation", string="Requested operation"
+    )
 
     @api.depends("rma_ids")
     def _compute_count_rma(self):

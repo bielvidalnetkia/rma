@@ -100,6 +100,7 @@ class TestRmaBatch(TransactionCase):
         """check that changing batch header fields propagates values to rmas"""
         with Form(self.env["rma.batch"]) as batch_form:
             batch_form.partner_id = self.partner
+            batch_form.operation_id = self.operation
             batch_form.user_id = self.user
             batch_form.team_id = self.team
             batch_form.tag_ids.add(self.tag1)

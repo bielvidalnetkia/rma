@@ -79,6 +79,11 @@
                                 readonly="state != 'draft'"
                                 force_save="1"
                             />
+                            <field
+                                name="operation_id"
+                                required="True"
+                                readonly="state != 'draft'"
+                            />
                         </group>
                         <group name="main_group_right">
                             <field name="date" readonly="state != 'draft'" />
