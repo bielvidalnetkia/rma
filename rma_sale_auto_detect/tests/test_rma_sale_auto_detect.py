@@ -232,3 +232,26 @@ class TestRmaSaleAutoDetect(TestRmaSaleAutoDetectBase):
         self.assertFalse(rma.move_id)
         self.assertFalse(rma.has_sale_auto_detect_issue)
         self.assertFalse(rma.sale_auto_detect_note)
+
+    def test_12(self):
+        """
+        partial return:
+        test that RMAs are linked to the sale line until the delivered quantity is
+        fully consumed, and that any additional RMA is left unlinked
+        """
+        sale_order = self._create_and_confirm_sale_order(
+            self.partner, [(self.product, 10)], 30
+        )
+        self._process_picking(sale_order.picking_ids, self.product, 10)
+        rma = self._create_rma(self.partner, self.product, 5, self.operation)
+        rma2 = self._create_rma(self.partner, self.product, 3, self.operation)
+        (rma + rma2).action_link_rma_to_sale_line()
+        self.assertEqual(rma.sale_line_id, sale_order.order_line)
+        self.assertEqual(rma2.sale_line_id, sale_order.order_line)
+        rma3 = self._create_rma(self.partner, self.product, 2, self.operation)
+        rma3.action_link_rma_to_sale_line()
+        self.assertEqual(rma3.sale_line_id, sale_order.order_line)
+        rma4 = self._create_rma(self.partner, self.product, 2, self.operation)
+        rma4.action_link_rma_to_sale_line()
+        # all delivered qty already linked, new rma should not be linked
+        self.assertFalse(rma4.sale_line_id)

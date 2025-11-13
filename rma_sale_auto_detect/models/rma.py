@@ -5,6 +5,7 @@ from collections import defaultdict
 from datetime import timedelta
 
 from odoo import _, api, fields, models
+from odoo.tools import float_compare
 
 
 class Rma(models.Model):
@@ -87,9 +88,21 @@ class Rma(models.Model):
 
     @api.model
     def _filter_sale_lines_by_delivery_move(self, sale_lines):
-        """get sale line only if the move is not linked"""
+        """return only sale order lines whose delivered moves still have returnable
+        quantity"""
+        precision = self.env["decimal.precision"].precision_get(
+            "Product Unit of Measure"
+        )
+
         return sale_lines.filtered(
-            lambda sol: any(m.state == "done" and not m.rma_ids for m in sol.move_ids)
+            lambda sol: any(
+                m.state == "done"
+                and float_compare(
+                    m.rma_returnable_uom_qty, 0, precision_digits=precision
+                )
+                > 0
+                for m in sol.move_ids
+            )
         )
 
     @api.model
