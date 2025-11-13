@@ -21,11 +21,25 @@ class Rma(models.Model):
             "Example: 30 days (change of mind), 730 days (warranty), "
             "0 to disable, or a large number for lifetime warranty."
         ),
-        default=30,
         compute="_compute_return_eligibility_days",
         store=True,
         readonly=False,
     )
+    return_eligibility_period_exceeded = fields.Boolean(
+        compute="_compute_return_eligibility_period_exceeded"
+    )
+
+    @api.depends("order_id.date_order", "return_eligibility_days", "state")
+    def _compute_return_eligibility_period_exceeded(self):
+        today = fields.Date.context_today(self)
+        for rec in self:
+            if rec.state != "draft" or not rec.order_id or not rec.order_id.date_order:
+                rec.return_eligibility_period_exceeded = False
+                continue
+            deadline = rec.order_id.date_order + timedelta(
+                days=rec.return_eligibility_days
+            )
+            rec.return_eligibility_period_exceeded = today > deadline.date()
 
     @api.depends("operation_id")
     def _compute_return_eligibility_days(self):

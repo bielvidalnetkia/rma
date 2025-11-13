@@ -14,6 +14,13 @@
                 >
                     <field name="sale_auto_detect_note" nolabel="1" />
                 </div>
+                <div
+                    role="alert"
+                    class="alert alert-warning"
+                    invisible="not return_eligibility_period_exceeded"
+                >
+                    This return may no longer be eligible; the return eligibility period has been exceeded
+                </div>
             </xpath>
             <xpath expr="//header" position="inside">
                 <button

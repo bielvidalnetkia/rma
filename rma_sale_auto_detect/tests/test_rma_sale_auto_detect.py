@@ -204,7 +204,9 @@ class TestRmaSaleAutoDetect(TestRmaSaleAutoDetectBase):
         self._process_picking(sale_order.picking_ids, self.product, 3)
         self._process_picking(sale_order.picking_ids, self.product, 2)
         rma = self._create_rma(self.partner, self.product, 5, self.operation)
+        self.assertFalse(rma.return_eligibility_period_exceeded)
         rma.order_id = sale_order
+        self.assertTrue(rma.return_eligibility_period_exceeded)
         rma.action_link_rma_to_sale_line()
         self.assertTrue(rma.move_id)
         self.assertFalse(rma.has_sale_auto_detect_issue)
