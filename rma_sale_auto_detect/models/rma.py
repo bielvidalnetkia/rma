@@ -188,3 +188,10 @@ class Rma(models.Model):
             else:
                 # duplicate for each additional move
                 self.copy(values)
+
+    def action_draft(self):
+        res = super().action_draft()
+        self.filtered(lambda r: r.state == "draft").write(
+            {"has_sale_auto_detect_issue": False, "sale_auto_detect_note": False}
+        )
+        return res

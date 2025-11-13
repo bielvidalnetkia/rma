@@ -255,3 +255,26 @@ class TestRmaSaleAutoDetect(TestRmaSaleAutoDetectBase):
         rma4.action_link_rma_to_sale_line()
         # all delivered qty already linked, new rma should not be linked
         self.assertFalse(rma4.sale_line_id)
+
+    def test_13(self):
+        """has_sale_auto_detect_issue is reset after rma set to draft"""
+        sale_order = self._create_and_confirm_sale_order(
+            self.partner, [(self.product, 5)], 60
+        )
+        self._process_picking(sale_order.picking_ids, self.product, 5)
+        rma = self._create_rma(self.partner, self.product, 5, self.operation)
+        rma.action_link_rma_to_sale_line()
+        self.assertFalse(rma.move_id)
+        self.assertTrue(rma.has_sale_auto_detect_issue)
+        self.assertEqual(
+            rma.sale_auto_detect_note,
+            "No delivery move found or insufficient delivered quantity.",
+        )
+        rma.action_cancel()
+        self.assertEqual(rma.state, "cancelled")
+        self.assertTrue(rma.has_sale_auto_detect_issue)
+        self.assertTrue(rma.sale_auto_detect_note)
+        rma.action_draft()
+        self.assertEqual(rma.state, "draft")
+        self.assertFalse(rma.has_sale_auto_detect_issue)
+        self.assertFalse(rma.sale_auto_detect_note)
