@@ -24,6 +24,9 @@
                     invisible="state != 'draft' or move_id"
                 />
             </xpath>
+            <xpath expr="//field[@name='order_id']" position="before">
+                <field name="return_eligibility_days" />
+            </xpath>
         </field>
     </record>
 </odoo>

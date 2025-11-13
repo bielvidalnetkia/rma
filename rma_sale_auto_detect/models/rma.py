@@ -1,7 +1,6 @@
 # Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from collections import defaultdict
 from datetime import timedelta
 
 from odoo import _, api, fields, models
@@ -14,17 +13,51 @@ class Rma(models.Model):
     has_sale_auto_detect_issue = fields.Boolean(readonly=True)
     ignore_sale_auto_detect = fields.Boolean(readonly=True)
     sale_auto_detect_note = fields.Text(readonly=True)
+    return_eligibility_days = fields.Integer(
+        string="Return eligibility duration (days)",
+        help=(
+            "Defines the time window in which sales can be linked "
+            "automatically to RMA lines. "
+            "Example: 30 days (change of mind), 730 days (warranty), "
+            "0 to disable, or a large number for lifetime warranty."
+        ),
+        default=30,
+        compute="_compute_return_eligibility_days",
+        store=True,
+        readonly=False,
+    )
+
+    @api.depends("operation_id")
+    def _compute_return_eligibility_days(self):
+        for rec in self:
+            if not rec.operation_id:
+                continue
+            rec.return_eligibility_days = rec.operation_id.return_eligibility_days
 
     def action_link_rma_to_sale_line(self):
         """automatically link RMAs to the most relevant sale order lines"""
+        sol_model = self.env["sale.order.line"]
+        _filter_sol = self._filter_sale_lines_by_delivery_move
+        _sort_sol = self._sort_sale_lines_by_order_date
         self.write(
             {"has_sale_auto_detect_issue": False, "sale_auto_detect_note": False}
         )
         rma_to_link = self.filtered(
             lambda r: not r.sale_line_id and not r.ignore_sale_auto_detect
         )
-        for rmas, sale_lines in rma_to_link._map_rmas_to_sale_lines().items():
-            rmas._link_rma_to_sale_line(sale_lines)
+        for rma in rma_to_link:
+            if rma.order_id:
+                sale_lines = rma.order_id.order_line.filtered(
+                    lambda line, r=rma: line.product_id == r.product_id
+                )
+            else:
+                sale_lines = sol_model.search(
+                    rma._get_eligible_sale_lines_domain(),
+                )
+
+            sale_lines = _filter_sol(sale_lines)
+            sale_lines = _sort_sol(sale_lines)
+            rma._link_rma_to_sale_line(sale_lines)
         # Mark remaining unmatched RMAs
         not_linked_rmas = rma_to_link.filtered(lambda r: not r.move_id)
         not_linked_rmas.has_sale_auto_detect_issue = True
@@ -33,58 +66,17 @@ class Rma(models.Model):
         )
         return True
 
-    def _map_rmas_to_sale_lines(self):
-        rma_with_so_suggestion = self.filtered("order_id")
-        rma_without_so_suggestion = self - rma_with_so_suggestion
-        rma_by_sale_lines = {}
-        for rma in rma_with_so_suggestion:
-            sale_lines = rma.order_id.order_line.filtered(
-                lambda line, r=rma: line.product_id == r.product_id
-            )
-            sale_lines = self._filter_sale_lines_by_delivery_move(sale_lines)
-            sale_lines = self._sort_sale_lines_by_order_date(sale_lines)
-            rma_by_sale_lines[rma] = sale_lines
-
-        rma_groups = rma_without_so_suggestion._group_rmas_for_sale_auto_link()
-        for (partner, product, operation), rmas in rma_groups.items():
-            sale_lines = self._get_eligible_sale_lines(partner, product, operation)
-            rma_by_sale_lines[rmas] = sale_lines
-        return rma_by_sale_lines
-
-    def _group_rmas_for_sale_auto_link(self):
-        """return grouped rmas by (partner, product, operation)"""
-        rma_groups = defaultdict(lambda: self.browse())
-        for rec in self:
-            if rec.state != "draft" or rec.move_id:
-                continue
-            return_eligibility_days = rec.operation_id.return_eligibility_days or 0
-            if return_eligibility_days <= 0:
-                continue
-            rma_groups[(rec.partner_id, rec.product_id, rec.operation_id)] += rec
-        return rma_groups
-
-    @api.model
-    def _get_eligible_sale_lines(self, partner, product, operation):
-        # filter only sale line that are delivered and have qty not linked to rma
-        # sort by date order
-        sale_lines = self.env["sale.order.line"].search(
-            self._get_eligible_sale_lines_domain(partner, product, operation),
-        )
-        sale_lines = self._filter_sale_lines_by_delivery_move(sale_lines)
-        sale_lines = self._sort_sale_lines_by_order_date(sale_lines)
-        return sale_lines
-
-    @api.model
-    def _get_eligible_sale_lines_domain(self, partner, product, operation):
-        return_eligibility_days = operation.return_eligibility_days or 0
+    def _get_eligible_sale_lines_domain(self):
+        self.ensure_one()
+        return_eligibility_days = self.return_eligibility_days or 0
         oldest_date = fields.Date.to_date(fields.Date.today()) - timedelta(
             days=return_eligibility_days
         )
         return [
-            ("order_id.partner_id", "child_of", partner.id),
+            ("order_id.partner_id", "child_of", self.partner_id.id),
             ("state", "in", ["sale", "done"]),
             ("order_id.date_order", ">=", oldest_date),
-            ("product_id", "=", product.id),
+            ("product_id", "=", self.product_id.id),
         ]
 
     @api.model
