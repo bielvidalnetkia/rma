@@ -2,6 +2,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 
+from odoo.exceptions import ValidationError
+
 from .common import TestRmaSaleAutoDetectBase
 
 
@@ -255,6 +257,16 @@ class TestRmaSaleAutoDetect(TestRmaSaleAutoDetectBase):
         rma4.action_link_rma_to_sale_line()
         # all delivered qty already linked, new rma should not be linked
         self.assertFalse(rma4.sale_line_id)
+        (rma + rma2 + rma3).action_confirm()
+        self.assertEqual(rma.state, "confirmed")
+        # force th move
+        rma4.write({"move_id": sale_order.order_line.move_ids.id})
+        with self.assertRaisesRegex(
+            ValidationError,
+            "The quantity to return exceeds the remaining returnable "
+            "quantity for this delivery",
+        ):
+            rma4.action_confirm()
 
     def test_13(self):
         """has_sale_auto_detect_issue is reset after rma set to draft"""

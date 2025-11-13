@@ -5,6 +5,7 @@ from collections import defaultdict
 from datetime import timedelta
 
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 from odoo.tools import float_compare
 
 
@@ -195,3 +196,26 @@ class Rma(models.Model):
             {"has_sale_auto_detect_issue": False, "sale_auto_detect_note": False}
         )
         return res
+
+    def action_confirm(self):
+        precision = self.env["decimal.precision"].precision_get(
+            "Product Unit of Measure"
+        )
+
+        for rec in self:
+            if rec.move_id and (
+                float_compare(
+                    rec.move_id.rma_returnable_uom_qty,
+                    0,
+                    precision_digits=precision,
+                )
+                < 0
+            ):
+                raise ValidationError(
+                    _(
+                        "The quantity to return exceeds the remaining returnable "
+                        "quantity for this delivery."
+                    )
+                )
+
+        return super().action_confirm()
