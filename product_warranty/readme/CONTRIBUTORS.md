@@ -11,3 +11,4 @@
 - Serpent Consulting Services Pvt. Ltd. \<<support@serpentcs.com>\>
 - [APSL-Nagarro](https://www.apsl.tech):
   - Antoni Marroig \<<amarroig@apsl.net>\>
+- Frederic Grall \<<fgr@apik.cloud>\>

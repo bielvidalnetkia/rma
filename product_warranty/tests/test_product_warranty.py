@@ -11,17 +11,88 @@ class TestProductWarranty(TransactionCase):
         super().setUpClass()
         cls.instruction_model = cls.env["return.instruction"]
         cls.supplierinfo = cls.env["product.supplierinfo"]
+        cls.create_test_datas(cls)
         cls.create_product_supplierinfo(cls)
+
+    def create_test_datas(self):
+        """
+        Create datas for test because not use demo datas.
+        """
+        self.return_instructions_id = self.env["return.instruction"].create(
+            {
+                "name": "Default Instruction",
+                "instructions": (
+                    "To return a product purchased through our platform vendor "
+                    "Marketplace, access our online Returns Center and click "
+                    "Return products to begin the application process for the return.\n"
+                    "Select the product you want to return and the reason "
+                    "for the return.You will need to provide detailed information "
+                    "to enable the seller to handle your request. "
+                    "Once the seller has reviewed your application, it will respond "
+                    "by e-mail within 3 working days."
+                ),
+                "is_default": True,
+            }
+        )
+        res_partner_main1 = self.env["res.partner"].create(
+            {
+                "name": "Chester Reed",
+                "email": "ready.mat28@example.com",
+                "function": "Chief Executive Officer (CEO)",
+                "phone": "(803)-873-6126",
+            }
+        )
+        self.env.company.crm_return_address_id = res_partner_main1
 
     def create_product_supplierinfo(self):
         """
         Create a record of product.supplier for next tests
         """
 
-        product_tmpl_id = self.env.ref("product.product_product_3")
+        product_tmpl_id = self.env["product.template"].create(
+            {
+                "name": "Desk Combination",
+                "list_price": 450.0,
+                "standard_price": 300.0,
+                "type": "consu",
+                "weight": 0.01,
+                "uom_id": self.env.ref("uom.product_uom_unit").id,
+                "description_sale": "Desk combination, black-brown: "
+                "chair + desk + drawer",
+                "default_code": "FURN_7800",
+            }
+        )
+        partner_id = self.env["res.partner"].create(
+            {
+                "name": "Ready Mat",
+                "is_company": True,
+                "street": "7500 W Linne Road",
+                "city": "Tracy",
+                "state_id": self.env.ref("base.state_us_5").id,
+                "zip": "95304",
+                "country_id": self.env.ref("base.us").id,
+                "email": "ready.mat28@example.com",
+                "phone": "(803)-873-6126",
+                "website": "http://www.ready-mat.com/",
+                "vat": "US12345675",
+            }
+        )
 
-        partner_id = self.env.ref("base.res_partner_4")
-        other_partner = self.env.ref("base.res_partner_12")
+        other_partner = self.env["res.partner"].create(
+            {
+                "name": "Azure Interior",
+                "is_company": True,
+                "street": "4557 De Silva St",
+                "city": "Fremont",
+                "state_id": self.env.ref("base.state_us_5").id,
+                "zip": "94538",
+                "country_id": self.env.ref("base.us").id,
+                "email": "azure.Interior24@example.com",
+                "phone": "(870)-931-0505",
+                "website": "http://www.azure-interior.com",
+                "vat": "US12345677",
+            }
+        )
 
         supplierinfo_data = dict(
             partner_id=partner_id.id,
@@ -43,12 +114,8 @@ class TestProductWarranty(TransactionCase):
         product.supplierinfo is created
         """
 
-        return_instructions_id = self.env.ref(
-            "product_warranty." "return_instruction_1"
-        )
-
         self.assertEqual(
-            self.supplierinfo_brw.return_instructions.id, return_instructions_id.id
+            self.supplierinfo_brw.return_instructions.id, self.return_instructions_id.id
         )
 
     def test_warranty_return_address(self):

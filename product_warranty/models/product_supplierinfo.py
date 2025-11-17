@@ -39,7 +39,7 @@ class ProductSupplierInfo(models.Model):
     return_instructions = fields.Many2one(
         "return.instruction",
         "Instructions",
-        default=_get_default_instructions,
+        default=lambda self: self._get_default_instructions(),
         help="Instructions for product return.",
     )
     active_supplier = fields.Boolean(
