@@ -120,7 +120,7 @@ class Rma(models.Model):
         """match between rmas and sale lines"""
         if not sale_lines:
             return False
-        sale_line_delivered_qty = self._get_sale_line_delivered_qty(sale_lines)
+        sale_line_delivered_qty = self._get_sale_line_returnable_qty(sale_lines)
         rmas = self.sorted("date")
         sale_lines = sale_lines.sorted(lambda sol: (sol.order_id.date_order, sol.id))
 
@@ -161,9 +161,14 @@ class Rma(models.Model):
                 rma_index += 1
 
     @api.model
-    def _get_sale_line_delivered_qty(self, sale_lines):
+    def _get_sale_line_returnable_qty(self, sale_lines):
         """return a dict mapping sale_line.id -> delivered quantity"""
-        return {line.id: line.qty_delivered or 0.0 for line in sale_lines}
+        return {
+            line.id: sum(line.move_ids.mapped("rma_returnable_uom_qty"))
+            if line.move_ids
+            else 0.0
+            for line in sale_lines
+        }
 
     def _link_rma_to_delivery_move(self, sale_line, qty_limit=None):
         """assign stock moves from a sale line to an rma
@@ -178,7 +183,7 @@ class Rma(models.Model):
 
         total_assigned = 0.0
         for i, move in enumerate(delivery_moves):
-            move_qty = move.product_uom_qty
+            move_qty = move.rma_returnable_uom_qty
             if qty_limit and total_assigned + move_qty > qty_limit:
                 move_qty = qty_limit - total_assigned
             total_assigned += move_qty
