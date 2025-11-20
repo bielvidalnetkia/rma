@@ -73,3 +73,14 @@ class Rma(models.Model):
                 raise ValidationError(
                     _("All RMAs in a batch must belong to the same partner")
                 )
+
+    def action_show_rma(self):
+        self.ensure_one()
+        return {
+            "name": self.display_name,
+            "type": "ir.actions.act_window",
+            "view_mode": "form",
+            "res_model": self._name,
+            "views": [(False, "form")],
+            "res_id": self.id,
+        }
