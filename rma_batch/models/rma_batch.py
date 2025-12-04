@@ -88,6 +88,11 @@ class RmaBatch(models.Model):
     operation_id = fields.Many2one(
         comodel_name="rma.operation", string="Requested operation"
     )
+    location_id = fields.Many2one(
+        comodel_name="stock.location",
+        domain=lambda self: self.env["rma"]._domain_location_id(),
+        help="Default RMA location that will be propagated to RMA order lines",
+    )
 
     @api.depends("rma_ids")
     def _compute_count_rma(self):
