@@ -123,7 +123,11 @@
                                         domain="[('category_id', '=', uom_category_id)]"
                                     />
                                     <field name="operation_id" />
-                                    <field name="state" />
+                                    <field
+                                        name="state"
+                                        readonly="True"
+                                        force_save="True"
+                                    />
                                     <field name="partner_id" optional="hide" />
                                     <field name="user_id" optional="hide" />
                                     <field name="team_id" optional="hide" />
