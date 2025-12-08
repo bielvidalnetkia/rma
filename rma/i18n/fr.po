@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-12-08 11:42+0000\n"
+"PO-Revision-Date: 2025-12-08 16:42+0000\n"
 "Last-Translator: SupportSNDC <support@sndc.fr>\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -25,8 +25,9 @@ msgstr "%s (copie)"
 
 #. module: rma
 #: model:ir.actions.report,print_report_name:rma.report_rma_action
+#, fuzzy
 msgid "(object._get_report_base_filename())"
-msgstr ""
+msgstr "(object._get_report_base_filename())"
 
 #. module: rma
 #. odoo-python
@@ -201,10 +202,13 @@ msgstr ""
 
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.rma_operation_kanban
+#, fuzzy
 msgid ""
 "<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" "
 "title=\"Manage\"/>"
 msgstr ""
+"<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title="
+"\"Manage\"/>"
 
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.portal_rma_page
@@ -1088,8 +1092,9 @@ msgstr "Abonnés (Partenaires)"
 
 #. module: rma
 #: model:ir.model.fields,help:rma.field_rma__activity_type_icon
+#, fuzzy
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Font awesome icon e.g. fa-tasks"
 
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.rma_view_search
@@ -1336,8 +1341,9 @@ msgstr "Responsable"
 
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma__manual_finish_allowed
+#, fuzzy
 msgid "Manual Finish Allowed"
-msgstr ""
+msgstr "Clôture manuelle autorisée"
 
 #. module: rma
 #: model:ir.model.fields.selection,name:rma.selection__rma_operation__action_create_delivery__manual_after_receipt
@@ -1524,6 +1530,9 @@ msgid ""
 "necessarily the model given by alias_model_id (example: project "
 "(parent_model) and task (model))"
 msgstr ""
+"Modèle parent détenant l'alias. Le modèle détenant la référence de l'alias "
+"n'est pas forcément celui défini par alias_model_id (exemple : project "
+"(parent_model) et task (model))"
 
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.rma_view_search
@@ -1539,6 +1548,12 @@ msgid ""
 "- followers: only followers of the related document or members of following "
 "channels\n"
 msgstr ""
+"Politique relative à la publication d'un message sur le document à l'aide de "
+"la passerelle de messagerie.\n"
+"- tout le monde : tout le monde peut publier\n"
+"- partenaires : uniquement les partenaires authentifiés\n"
+"- abonnés : uniquement les abonnés du document concerné ou les membres des "
+"canaux suivants\n"
 
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma__access_url
@@ -1827,7 +1842,7 @@ msgstr "Email de notification brouillon RMA"
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_stock_warehouse__rma_in_route_id
 msgid "RMA in Route"
-msgstr ""
+msgstr "Route d'entrée RMA"
 
 #. module: rma
 #: model:mail.message.subtype,description:rma.mt_rma_draft
@@ -1836,8 +1851,9 @@ msgstr "RMA au statut brouillon"
 
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_stock_warehouse__rma_out_replace_route_id
+#, fuzzy
 msgid "RMA out Replace Route"
-msgstr ""
+msgstr "Route sortante RMA pour remplacement"
 
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_stock_warehouse__rma_out_route_id
@@ -1846,8 +1862,9 @@ msgstr "Route de sortie RMA"
 
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_stock_move__rma_receiver_ids
+#, fuzzy
 msgid "RMA receivers"
-msgstr ""
+msgstr "Récepteurs RMA"
 
 #. module: rma
 #: model:ir.model.fields,help:rma.field_stock_warehouse__rma
@@ -2101,9 +2118,9 @@ msgstr "Retourné"
 #. module: rma
 #. odoo-python
 #: code:addons/rma/wizard/stock_picking_return.py:0
-#, python-format
+#, fuzzy, python-format
 msgid "Returned Picking"
-msgstr ""
+msgstr "Transfert retourné"
 
 #. module: rma
 #: model:ir.model.fields,field_description:rma.field_rma_tag__rma_ids
