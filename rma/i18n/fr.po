@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-12-08 16:42+0000\n"
+"PO-Revision-Date: 2025-12-09 09:57+0000\n"
 "Last-Translator: SupportSNDC <support@sndc.fr>\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -2366,10 +2366,15 @@ msgstr "Ce nom d'opération existe déjà !"
 
 #. module: rma
 #: model_terms:ir.actions.act_window,help:rma.rma_dashboard_action
+#, fuzzy
 msgid ""
 "The RMA operation system allows you to configure each return operation\n"
 "                with specific settings that will adjust its behavior."
 msgstr ""
+"Le système d’opérations RMA vous permet de configurer chaque opération de "
+"retour\n"
+"                                     avec des paramètres spécifiques afin d’"
+"en adapter le comportement."
 
 #. module: rma
 #: model:ir.model.fields,help:rma.field_rma_tag__active
@@ -2378,11 +2383,16 @@ msgstr "Le champ actif vous permet de cacher la catégorie sans l'enlever."
 
 #. module: rma
 #: model:ir.model.fields,help:rma.field_rma_team__alias_model_id
+#, fuzzy
 msgid ""
 "The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
+"Le modèle (type de document Odoo) auquel cet alias correspond. Tout e-mail "
+"entrant qui n’est pas une réponse à un enregistrement existant entraînera la "
+"création d’un nouvel enregistrement de ce modèle (par ex. une tâche de "
+"projet)"
 
 #. module: rma
 #: model:ir.model.fields,help:rma.field_rma_team__alias_name
@@ -2401,6 +2411,11 @@ msgid ""
 "the sender (From) address, or will use the Administrator account if no "
 "system user is found for that address."
 msgstr ""
+"Le propriétaire des enregistrements créés lors de la réception d’e-mails sur "
+"cet alias. Si ce champ n’est pas renseigné, le système tentera de trouver le "
+"bon propriétaire à partir de l’adresse de l’expéditeur (From), ou utilisera "
+"le compte Administrateur si aucun utilisateur système n’est trouvé pour "
+"cette adresse."
 
 #. module: rma
 #. odoo-python
@@ -2410,6 +2425,8 @@ msgid ""
 "The quantity done for the product '%(id)s' must be equal to its initial "
 "demand because the stock move is linked to an RMA (%(name)s)."
 msgstr ""
+"La quantité effectuée pour le produit '%(id)s' doit être égale à sa demande "
+"initiale, car le mouvement de stock est lié à un RMA (%(name)s)."
 
 #. module: rma
 #. odoo-python
@@ -2678,13 +2695,15 @@ msgstr ""
 #: model:mail.template,report_name:rma.mail_template_rma_draft_notification
 #: model:mail.template,report_name:rma.mail_template_rma_notification
 #: model:mail.template,report_name:rma.mail_template_rma_receipt_notification
+#, fuzzy
 msgid "{{(object.name or '')}}"
-msgstr ""
+msgstr "{{(object.name or '')}}"
 
 #. module: rma
 #: model:mail.template,subject:rma.mail_template_rma_notification
+#, fuzzy
 msgid "{{object.company_id.name}} RMA (Ref {{object.name or 'n/a' }})"
-msgstr ""
+msgstr "{{object.company_id.name}} RMA (Ref {{object.name or 'n/a' }})"
 
 #. module: rma
 #: model:mail.template,subject:rma.mail_template_rma_receipt_notification
