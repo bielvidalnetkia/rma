@@ -13,6 +13,7 @@
     "installable": True,
     "depends": ["rma_lot", "repair"],
     "data": [
+        "data/rma_operation_data.xml",
         "views/rma_operation.xml",
         "views/rma_views.xml",
         "views/repair_views.xml",
