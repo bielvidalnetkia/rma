@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: rma (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-15 07:36+0000\n"
-"PO-Revision-Date: 2023-11-02 16:38+0000\n"
+"PO-Revision-Date: 2025-12-16 12:43+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-rma-8-0/language/it/"
 ")\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: crm_rma_prodlot_supplier
 #: model:ir.model,name:crm_rma_prodlot_supplier.model_stock_production_lot
@@ -27,7 +27,7 @@ msgstr "Lotto/seriale"
 #. module: crm_rma_prodlot_supplier
 #: model:ir.model,name:crm_rma_prodlot_supplier.model_stock_picking
 msgid "Picking List"
-msgstr "Lista Picking"
+msgstr "Lista prelievo"
 
 #. module: crm_rma_prodlot_supplier
 #: model:ir.model,name:crm_rma_prodlot_supplier.model_stock_transfer_details
