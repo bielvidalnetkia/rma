@@ -84,6 +84,7 @@
                                 required="True"
                                 readonly="state != 'draft'"
                             />
+                            <field name="location_id" readonly="state != 'draft'" />
                         </group>
                         <group name="main_group_right">
                             <field name="date" readonly="state != 'draft'" />
