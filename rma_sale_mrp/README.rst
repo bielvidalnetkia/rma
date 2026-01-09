@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ================================================================
 Return Merchandise Authorization Management - Link with MRP Kits
 ================================================================
@@ -17,24 +13,25 @@ Return Merchandise Authorization Management - Link with MRP Kits
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Frma-lightgray.png?logo=github
-    :target: https://github.com/OCA/rma/tree/16.0/rma_sale_mrp
+    :target: https://github.com/OCA/rma/tree/18.0/rma_sale_mrp
     :alt: OCA/rma
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/rma-16-0/rma-16-0-rma_sale_mrp
+    :target: https://translation.odoo-community.org/projects/rma-18-0/rma-18-0-rma_sale_mrp
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/rma&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/rma&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module enables RMAs for kits, wich isn't compatible with the base modules.
-In the backend side, we can return separate component while in the frontend
-side, customers can return the whole kit and the proper RMAs will be generated.
+This module enables RMAs for kits, wich isn't compatible with the base
+modules. In the backend side, we can return separate component while in
+the frontend side, customers can return the whole kit and the proper
+RMAs will be generated.
 
 **Table of contents**
 
@@ -46,34 +43,35 @@ Usage
 
 To use this module, you need to:
 
-#. Make a a sale order with a kit on it and deliver its components.
-#. Go to the portal view for the order and launch the RMA wizard.
-#. You'll see a line for the kit.
-#. There will be a limit of kits to return that should much the number of kits
-   delivered.
-#. Once you validate the wizard with the number of kits to deliver, you'll
-   have as many RMAs as components those kits have with the proper quantities
-   for each one.
-#. If you refund the components, the kit in the sale line will be used as the
-   reference.
+1. Make a a sale order with a kit on it and deliver its components.
+2. Go to the portal view for the order and launch the RMA wizard.
+3. You'll see a line for the kit.
+4. There will be a limit of kits to return that should much the number
+   of kits delivered.
+5. Once you validate the wizard with the number of kits to deliver,
+   you'll have as many RMAs as components those kits have with the
+   proper quantities for each one.
+6. If you refund the components, the kit in the sale line will be used
+   as the reference.
 
 Known issues / Roadmap
 ======================
 
-We compute the kits from the original demanded quantity in the sale order. If
-this quantity was to change, we could loose the right components per kit
-reference. So this should be very present. Also, v12 has a very poor support
-for delivered quantities, that is very improved in v13 with the introduction
-of the link to the BoM line in the stock moves. That approach could lead to
-errors as well, as the BoM line could change in the future loosing again the
-original components per kit reference. Anyway, is to be considered in that
-version to use the same rules so they fail for the same reasons.
+We compute the kits from the original demanded quantity in the sale
+order. If this quantity was to change, we could loose the right
+components per kit reference. So this should be very present. Also, v12
+has a very poor support for delivered quantities, that is very improved
+in v13 with the introduction of the link to the BoM line in the stock
+moves. That approach could lead to errors as well, as the BoM line could
+change in the future loosing again the original components per kit
+reference. Anyway, is to be considered in that version to use the same
+rules so they fail for the same reasons.
 
 Some extra features would be nice to have:
 
-* Add actions constraints to disallow actions on single components.
-* Show kit components in the portal wizard.
-* Allow to make an RMA directly from a kit product.
+- Add actions constraints to disallow actions on single components.
+- Show kit components in the portal wizard.
+- Allow to make an RMA directly from a kit product.
 
 Bug Tracker
 ===========
@@ -81,7 +79,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/rma/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/rma/issues/new?body=module:%20rma_sale_mrp%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/rma/issues/new?body=module:%20rma_sale_mrp%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -89,20 +87,21 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Tecnativa
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Tecnativa <https://www.tecnativa.com>`__:
+- `Tecnativa <https://www.tecnativa.com>`__:
 
-  * David Vidal
-* Michael Tietz (MT Software) <mtietz@mt-software.de>
+  - David Vidal
+
+- Michael Tietz (MT Software) <mtietz@mt-software.de>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -122,6 +121,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-chienandalu| 
 
-This module is part of the `OCA/rma <https://github.com/OCA/rma/tree/16.0/rma_sale_mrp>`_ project on GitHub.
+This module is part of the `OCA/rma <https://github.com/OCA/rma/tree/18.0/rma_sale_mrp>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

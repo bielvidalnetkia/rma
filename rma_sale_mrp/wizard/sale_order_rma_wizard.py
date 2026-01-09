@@ -123,9 +123,7 @@ class SaleOrderLineRmaWizard(models.TransientModel):
         """It will be used as a reference for the components"""
         res = super()._prepare_rma_values()
         if self.phantom_bom_product:
-            unique_register = "{}-{}-{}".format(
-                self.wizard_id.id, self.phantom_bom_product.id, self.sale_line_id.id
-            )
+            unique_register = f"{self.wizard_id.id}-{self.phantom_bom_product.id}-{self.sale_line_id.id}"
             res.update(
                 {
                     "phantom_bom_product": self.phantom_bom_product.id,

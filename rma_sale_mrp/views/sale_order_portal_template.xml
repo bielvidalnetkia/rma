@@ -72,8 +72,8 @@
                 <div class="row mb-2 mb-sm-1">
                     <div class="col-12 col-sm-4">
                         <strong><i
-                                class="fa fa-th-large text-info"
-                            /> Kit Quantity</strong>
+                            class="fa fa-th-large text-info"
+                        /> Kit Quantity</strong>
                     </div>
                     <div class="col-12 col-sm-8">
                         <span t-esc="rma.kit_qty" />
@@ -103,32 +103,33 @@
                             <i class="fa-reply me-1 fa" role="img" />
                             <span t-esc="kit_rma.name" class="me-lg-3" />
                             <div class="d-lg-inline-block"><span
-                                    t-field="kit_rma.sudo().product_id.display_name"
-                                /> (<span t-field="kit_rma.product_uom_qty" />)</div>
+                                t-field="kit_rma.sudo().product_id.display_name"
+                            /> (<span t-field="kit_rma.product_uom_qty" />)</div>
                         </div>
                         <t
                             t-if="kit_rma.state in ['confirmed', 'received', 'returned', 'replaced', 'locked', 'refunded']"
                         >
-                            <span class="badge label-text-align bg-success"><i
-                                    class="fa fa-fw fa-reply"
-                                /> <span t-field="kit_rma.state" /></span>
+                            <span class="badge label-text-align bg-success">
+                                <i class="fa fa-fw fa-reply" />
+                                <span t-field="kit_rma.state" />
+                            </span>
                         </t>
                         <t
                             t-if="kit_rma.state in ['waiting_return', 'waiting_replacement']"
                         >
                             <span class="label-text-align badge bg-warning"><i
-                                    class="fa fa-fw fa-clock-o"
-                                /> Waiting</span>
+                                class="fa fa-fw fa-clock-o"
+                            /> Waiting</span>
                         </t>
                         <t t-if="kit_rma.state == 'cancelled'">
                             <span class="badge label-text-align bg-danger"><i
-                                    class="fa fa-fw fa-times"
-                                /> Cancelled</span>
+                                class="fa fa-fw fa-times"
+                            /> Cancelled</span>
                         </t>
                         <t t-if="kit_rma.state == 'draft'">
                             <span class="badge bg-info label-text-align"><i
-                                    class="fa fa-fw fa-clock-o"
-                                /> Draft</span>
+                                class="fa fa-fw fa-clock-o"
+                            /> Draft</span>
                         </t>
                     </a>
                 </t>
@@ -146,9 +147,8 @@
         <xpath expr="//td[@name='td_product']" position="after">
             <td name="td_kit">
                 <t t-if="rma.sudo().phantom_bom_product">
-                    <i class="fa fa-th-large text-info" /> <span
-                        t-esc="rma.sudo().phantom_bom_product.display_name"
-                    />
+                    <i class="fa fa-th-large text-info" />
+                    <span t-esc="rma.sudo().phantom_bom_product.display_name" />
                     <span> (<t t-esc="rma.kit_qty" />)</span>
                 </t>
             </td>
