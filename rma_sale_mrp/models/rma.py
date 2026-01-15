@@ -1,6 +1,6 @@
 # Copyright 2020 Tecnativa - David Vidal
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 
@@ -41,11 +41,14 @@ class Rma(models.Model):
         for rma_kit_register in phantom_rmas.mapped("rma_kit_register"):
             # We want to avoid refunding kits that aren't completely processed
             rmas_by_register = phantom_rmas.filtered(
-                lambda x: x.rma_kit_register == rma_kit_register
+                lambda x, rma_kit_register=rma_kit_register: x.rma_kit_register
+                == rma_kit_register
             )
             if any(rmas_by_register.filtered(lambda x: x.state != "received")):
                 raise UserError(
-                    _("You can't refund a kit in wich some RMAs aren't received")
+                    self.env._(
+                        "You can't refund a kit in wich some RMAs aren't received"
+                    )
                 )
             self |= rmas_by_register[0]
         res = super().action_refund()
@@ -53,7 +56,8 @@ class Rma(models.Model):
         # to one invoice line.
         for rma_kit_register in set(phantom_rmas.mapped("rma_kit_register")):
             grouped_rmas = phantom_rmas.filtered(
-                lambda x: x.rma_kit_register == rma_kit_register
+                lambda x, rma_kit_register=rma_kit_register: x.rma_kit_register
+                == rma_kit_register
             )
             lead_rma = grouped_rmas.filtered("refund_line_id")
             grouped_rmas -= lead_rma
@@ -69,9 +73,10 @@ class Rma(models.Model):
     def action_draft(self):
         if self.filtered(lambda r: r.state == "cancelled" and r.phantom_bom_product):
             raise UserError(
-                _(
-                    "To avoid kit quantities inconsistencies it is not possible to convert "
-                    "to draft a cancelled RMA. You should do a new one from the sales order."
+                self.env._(
+                    "To avoid kit quantities inconsistencies it is not possible to "
+                    "convert to draft a cancelled RMA. You should do a new one from "
+                    "the sales order."
                 )
             )
         return super().action_draft()

@@ -36,7 +36,7 @@
         </xpath>
         <!-- TODO: We could give a clue about what's to be returned, with readonly detailed lines -->
         <xpath
-            expr="//tbody[hasclass('request-rma-tbody')]//t[@t-if=&quot;data['quantity'] &gt; 0 and data['picking']&quot;]/tr"
+            expr="//tbody[hasclass('request-rma-tbody')]//t[@t-if=&quot;data['picking']&quot;]/tr"
             position="attributes"
         >
             <attribute
@@ -44,12 +44,12 @@
             >#{data.get('phantom_bom_product') and 'd-none'}</attribute>
         </xpath>
         <xpath
-            expr="//tbody[hasclass('request-rma-tbody')]//t[@t-if=&quot;data['quantity'] &gt; 0 and data['picking']&quot;]"
+            expr="//tbody[hasclass('request-rma-tbody')]//t[@t-if=&quot;data['picking']&quot;]"
             position="attributes"
         >
             <attribute
                 name="t-if"
-            >data['quantity'] &gt; 0 and (data['picking'] or data.get('phantom_kit_line'))</attribute>
+            >data['picking'] or data.get('phantom_kit_line')</attribute>
         </xpath>
         <xpath
             expr="//select[@t-attf-name='#{data_index}-operation_id']/option"

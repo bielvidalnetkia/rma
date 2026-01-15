@@ -5,17 +5,17 @@ from odoo.tests import HttpCase, new_test_user, tagged
 from .test_rma_sale_mrp import TestRmaSaleMrpBase
 
 
-@tagged("post_install")
+@tagged("-at_install", "post_install")
 class TestRmaSaleMrpPortal(TestRmaSaleMrpBase, HttpCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.sale_order = cls._create_sale_order(cls, [[cls.product_kit, 5]])
+        cls.sale_order = cls._create_sale_order([[cls.product_kit, 5]])
         cls.sale_order.action_confirm()
         cls.sale_order.name = "Test Sale Mrp RMA SO"
         cls.order_out_picking = cls.sale_order.picking_ids
         for move in cls.order_out_picking.move_ids:
-            move.quantity_done = move.product_uom_qty
+            move.quantity = move.product_uom_qty
         cls.order_out_picking.button_validate()
         # Let's create some companion contacts
         cls.partner_company = cls.res_partner.create(

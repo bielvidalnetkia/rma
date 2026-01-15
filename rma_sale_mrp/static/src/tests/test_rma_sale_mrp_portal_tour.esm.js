@@ -1,42 +1,40 @@
-/** @odoo-module */
 /* Copyright 2026 Tecnativa - Víctor Martínez
    License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). */
 
-import tour from "web_tour.tour";
+import {registry} from "@web/core/registry";
 
-tour.register(
-    "rma_sale_mrp_portal",
-    {
-        test: true,
-        url: "/my/orders",
-    },
-    [
+registry.category("web_tour.tours").add("rma_sale_mrp_portal", {
+    url: "/my/orders",
+    steps: () => [
         {
             content: "Open the test sale order",
-            trigger: 'a:containsExact("Test Sale Mrp RMA SO")',
+            trigger: 'a:contains("Test Sale Mrp RMA SO")',
+            run: "click",
         },
         {
             content: "Open the RMA request pop-up",
             trigger: 'a:contains("Request RMAs")',
+            run: "click",
         },
         {
             content: "Return 5 unit for the first row",
             trigger: "input[name='0-quantity']",
-            run: "text 5",
+            run: "edit 5",
         },
         {
             content: "Select the operation",
             trigger: "select[name='0-operation_id']",
-            run: "text Replace",
+            run: "select 1",
         },
         {
             content: "Write some comments",
             trigger: "textarea[name='0-description']",
-            run: "text I'd like to change this product",
+            run: "edit I'd like to change this product",
         },
         {
             content: "Unfold the Delivery Address picker",
             trigger: "button:contains('Choose a delivery address')",
+            run: "click",
         },
         {
             content: "Choose another address",
@@ -46,10 +44,7 @@ tour.register(
         {
             content: "Submit the RMA",
             trigger: "button[type='submit']",
+            run: "click",
         },
-        {
-            content: "RMA(s) button",
-            trigger: 'a.btn-secondary[href*="/my/rmas"]',
-        },
-    ]
-);
+    ],
+});

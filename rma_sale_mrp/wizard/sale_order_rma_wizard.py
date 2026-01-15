@@ -1,7 +1,7 @@
 # Copyright 2020 Tecnativa - David Vidal
 # Copyright 2023 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -16,24 +16,27 @@ class SaleOrderRmaWizard(models.TransientModel):
         string="Component Lines",
     )
 
-    @api.model
-    def create(self, vals):
+    @api.model_create_multi
+    def create(self, vals_list):
         """Split component lines"""
-        if "line_ids" in vals and vals.get("line_ids"):
-            line_ids = [
-                (x[0], x[1], x[2])
-                for x in vals.get("line_ids")
-                if not x[2].get("phantom_bom_product")
-            ]
-            component_line_ids = [
-                (x[0], x[1], x[2])
-                for x in vals.get("line_ids")
-                if x[2].get("phantom_bom_product")
-            ]
-            vals.update(
-                {"line_ids": line_ids, "component_line_ids": component_line_ids}
-            )
-        return super().create(vals)
+        new_vals_list = []
+        for vals in vals_list:
+            if "line_ids" in vals and vals.get("line_ids"):
+                line_ids = [
+                    (x[0], x[1], x[2])
+                    for x in vals.get("line_ids")
+                    if not x[2].get("phantom_bom_product")
+                ]
+                component_line_ids = [
+                    (x[0], x[1], x[2])
+                    for x in vals.get("line_ids")
+                    if x[2].get("phantom_bom_product")
+                ]
+                vals.update(
+                    {"line_ids": line_ids, "component_line_ids": component_line_ids}
+                )
+            new_vals_list.append(vals)
+        return super().create(new_vals_list)
 
     def create_rma(self, from_portal=None):
         """We kept the component lines in the shade and now we need to take
@@ -46,16 +49,16 @@ class SaleOrderRmaWizard(models.TransientModel):
             # split them to get the right quantities and operations for each
             # one and then group them by product to process them altogether
             kit_component_lines = self.component_line_ids.filtered(
-                lambda x: x.phantom_bom_product == line.product_id
+                lambda x, line=line: x.phantom_bom_product == line.product_id
                 and x.sale_line_id == line.sale_line_id
             )
             for product in kit_component_lines.mapped("product_id"):
                 product_kit_component_lines = kit_component_lines.filtered(
-                    lambda x: x.product_id == product and x.quantity
+                    lambda x, product=product: x.product_id == product and x.quantity
                 )
                 if not product_kit_component_lines:
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "The kit corresponding to the product %s can't be "
                             "put in the RMA. Either all or some of the components "
                             "where already put in another RMA"
@@ -110,7 +113,7 @@ class SaleOrderLineRmaWizard(models.TransientModel):
         res = super(SaleOrderLineRmaWizard, not_kit)._compute_move_id()
         for line in self.filtered(lambda x: x.phantom_bom_product and x.picking_id):
             line.move_id = line.picking_id.move_ids.filtered(
-                lambda ml: (
+                lambda ml, line=line: (
                     ml.product_id == line.product_id
                     and ml.sale_line_id == line.sale_line_id
                     and ml.sale_line_id.product_id == line.phantom_bom_product
@@ -123,7 +126,11 @@ class SaleOrderLineRmaWizard(models.TransientModel):
         """It will be used as a reference for the components"""
         res = super()._prepare_rma_values()
         if self.phantom_bom_product:
-            unique_register = f"{self.wizard_id.id}-{self.phantom_bom_product.id}-{self.sale_line_id.id}"
+            unique_register = (
+                f"{self.wizard_id.id}-"
+                f"{self.phantom_bom_product.id}-"
+                f"{self.sale_line_id.id}"
+            )
             res.update(
                 {
                     "phantom_bom_product": self.phantom_bom_product.id,

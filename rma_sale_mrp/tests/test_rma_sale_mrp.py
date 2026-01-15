@@ -15,8 +15,12 @@ class TestRmaSaleMrpBase(TestRmaSaleBase):
         cls.product_kit = cls.product_product.create(
             {"name": "Product test 1", "type": "consu"}
         )
-        cls.product_kit_comp_1 = cls.product_1
-        cls.product_kit_comp_2 = cls.product_2
+        cls.product_kit_comp_1 = cls.product_product.create(
+            {"name": "Product test-kit 1", "type": "consu"}
+        )
+        cls.product_kit_comp_2 = cls.product_product.create(
+            {"name": "Product test-kit 2", "type": "consu"}
+        )
         cls.bom = cls.env["mrp.bom"].create(
             {
                 "product_id": cls.product_kit.id,
@@ -37,10 +41,10 @@ class TestRmaSaleMrpBase(TestRmaSaleBase):
             }
         )
         cls.product_2 = cls.product_product.create(
-            {"name": "Product test 2", "type": "product"}
+            {"name": "Product test 2", "type": "consu"}
         )
 
-        cls.sale_order = cls._create_sale_order(cls, [[cls.product_kit, 5]])
+        cls.sale_order = cls._create_sale_order([[cls.product_kit, 5]])
         cls.sale_order.action_confirm()
         # Maybe other modules create additional lines in the create
         # method in sale.order model, so let's find the correct line.
@@ -51,7 +55,7 @@ class TestRmaSaleMrpBase(TestRmaSaleBase):
         # Confirm but leave a backorder to split moves so we can test that
         # the wizard correctly creates the RMAs with the proper quantities
         for line in cls.order_out_picking.move_ids:
-            line.quantity_done = line.product_uom_qty - 7
+            line.quantity = line.product_uom_qty - 7
         wiz_act = cls.order_out_picking.button_validate()
         wiz = Form(
             cls.env[wiz_act["res_model"]].with_context(**wiz_act["context"])
@@ -59,7 +63,7 @@ class TestRmaSaleMrpBase(TestRmaSaleBase):
         wiz.process()
         cls.backorder = cls.sale_order.picking_ids - cls.order_out_picking
         for line in cls.backorder.move_ids:
-            line.quantity_done = line.product_uom_qty
+            line.quantity = line.product_uom_qty
         cls.backorder.button_validate()
 
 
@@ -111,17 +115,14 @@ class TestRmaSaleMrp(TestRmaSaleMrpBase):
             {"login": "test_refund_with_so", "name": "Test"}
         )
         order.user_id = user.id
-        rma.reception_move_id.quantity_done = rma.product_uom_qty
-        rma.reception_move_id._action_done()
+        rma.reception_move_id.quantity = rma.product_uom_qty
         # All the component RMAs must be received if we want to make a refund
         with self.assertRaises(UserError):
             rma.action_refund()
         rmas_left = rmas - rma
         for additional_rma in rmas_left:
-            additional_rma.reception_move_id.quantity_done = (
-                additional_rma.product_uom_qty
-            )
-            additional_rma.reception_move_id._action_done()
+            additional_rma.reception_move_id.quantity = additional_rma.product_uom_qty
+            additional_rma.reception_move_id.picking_id.button_validate()
         rma.action_refund()
         self.assertEqual(rma.refund_id.user_id, user)
         # The component RMAs get automatically refunded
@@ -132,13 +133,10 @@ class TestRmaSaleMrp(TestRmaSaleMrpBase):
         # We can still return another kit
         wizard = self._rma_sale_wizard(order)
         self.assertEqual(wizard.line_ids.quantity, 1)
-        wizard.create_and_open_rma()
-        # Now we open the wizard again and try to force the RMA qty wich should
-        # be 0 at this time
-        wizard = self._rma_sale_wizard(order)
-        self.assertEqual(wizard.line_ids.quantity, 0)
+        # Now we try to force the RMA qty wich should
+        # be 1 at this time
         with self.assertRaises(ValidationError):
-            wizard.line_ids.quantity = 1
+            wizard.line_ids.quantity = 2
 
     def test_report_rma(self):
         wizard = self._rma_sale_wizard(self.sale_order)
