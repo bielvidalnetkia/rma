@@ -145,7 +145,7 @@ msgstr ""
 #. module: rma_reason
 #: model:ir.actions.act_window,name:rma_reason.rma_reason_act_window
 #: model:ir.ui.menu,name:rma_reason.rma_reason_menu
-msgid "RMA Reasons"
+msgid "Reasons"
 msgstr ""
 
 #. module: rma_reason
