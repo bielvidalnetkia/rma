@@ -168,8 +168,8 @@ msgstr "Motivo RMA"
 #. module: rma_reason
 #: model:ir.actions.act_window,name:rma_reason.rma_reason_act_window
 #: model:ir.ui.menu,name:rma_reason.rma_reason_menu
-msgid "RMA Reasons"
-msgstr "Motivi RMA"
+msgid "Reasons"
+msgstr "Motivi"
 
 #. module: rma_reason
 #: model:ir.model.fields,field_description:rma_reason.field_rma__reason_id
