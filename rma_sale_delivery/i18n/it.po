@@ -1,0 +1,40 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* rma_sale_delivery
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: rma_sale_delivery
+#: model:ir.model.fields,field_description:rma_sale_delivery.field_sale_order_rma_wizard__company_id
+msgid "Company"
+msgstr ""
+
+#. module: rma_sale_delivery
+#: model:ir.model.fields,field_description:rma_sale_delivery.field_sale_order_rma_wizard__rma_reception_strategy
+msgid "RMA reception method strategy"
+msgstr ""
+
+#. module: rma_sale_delivery
+#: model:ir.model.fields,field_description:rma_sale_delivery.field_sale_order_rma_wizard__reception_carrier_id
+msgid "Reception Carrier"
+msgstr ""
+
+#. module: rma_sale_delivery
+#: model:ir.model,name:rma_sale_delivery.model_sale_order_line_rma_wizard
+msgid "Sale Order Line Rma Wizard"
+msgstr ""
+
+#. module: rma_sale_delivery
+#: model:ir.model,name:rma_sale_delivery.model_sale_order_rma_wizard
+msgid "Sale Order Rma Wizard"
+msgstr ""
