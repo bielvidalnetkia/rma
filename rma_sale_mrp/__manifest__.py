@@ -19,4 +19,9 @@
         "views/report_rma.xml",
         "wizard/sale_order_rma_wizard_views.xml",
     ],
+    "assets": {
+        "web.assets_tests": [
+            "/rma_sale_mrp/static/src/tests/*.js",
+        ],
+    },
 }
