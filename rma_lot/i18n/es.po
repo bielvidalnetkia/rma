@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-03-18 13:30+0000\n"
+"PO-Revision-Date: 2026-03-18 14:29+0000\n"
 "Last-Translator: Víctor Martínez <victor.martinez@tecnativa.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 #. module: rma_lot
 #: model:ir.model.fields,field_description:rma_lot.field_rma_operation__deliver_same_lot
 msgid "Deliver Same Lot/Serial as Received"
-msgstr ""
+msgstr "Devolver mismo Número de lote/serie recibido"
 
 #. module: rma_lot
 #: model:ir.model.fields,help:rma_lot.field_rma_operation__deliver_same_lot
@@ -42,14 +42,14 @@ msgstr ""
 #. module: rma_lot
 #: model:ir.model,name:rma_lot.model_rma
 msgid "RMA"
-msgstr ""
+msgstr "RMA"
 
 #. module: rma_lot
 #: model:ir.model,name:rma_lot.model_rma_operation
 msgid "RMA requested operation"
-msgstr ""
+msgstr "Operación de RMA solicitada"
 
 #. module: rma_lot
 #: model:ir.model,name:rma_lot.model_stock_return_picking_line
 msgid "Return Picking Line"
-msgstr ""
+msgstr "Línea de albarán de devolución"
