@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-09 08:07+0000\n"
-"PO-Revision-Date: 2026-03-23 09:45+0000\n"
+"PO-Revision-Date: 2026-03-23 12:45+0000\n"
 "Last-Translator: alexmorel-tecnativa <alex.morel@tecnativa.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -123,7 +123,7 @@ msgstr ""
 "                    </t>\n"
 "                    <br>\n"
 "                    <br>\n"
-"                    Losproductos para su RMA\n"
+"                    Los productos para su RMA\n"
 "                    <strong>\n"
 "                        <t t-out=\"object.name\"></t>\n"
 "                    </strong>\n"
@@ -2349,6 +2349,8 @@ msgid ""
 "The RMA operation system allows you to configure each return operation\n"
 "                with specific settings that will adjust its behavior."
 msgstr ""
+"El sistema de operaciones de RMA permite configurar cada operación de "
+"devolución con ajustes específicos que adaptan su comportamiento."
 
 #. module: rma
 #: model:ir.model.fields,help:rma.field_rma_tag__active
@@ -2399,7 +2401,7 @@ msgstr "La cantidad a devolver es mayor que la cantidad restante del RMA."
 #: code:addons/rma/models/rma.py:0
 #, python-format
 msgid "The reception must be done before finishing this rma"
-msgstr ""
+msgstr "La recepción debe realizarse antes de finalizar este RMA"
 
 #. module: rma
 #. odoo-python
@@ -2409,6 +2411,8 @@ msgid ""
 "The selected operation requires a return product different from the "
 "originally delivered item. Please select the product to return."
 msgstr ""
+"La operación seleccionada requiere un producto distinto al entregado "
+"originalmente. Seleccione el producto a devolver."
 
 #. module: rma
 #: model:ir.model.fields,help:rma.field_rma_tag__is_public
@@ -2502,7 +2506,7 @@ msgstr "UdM"
 #. module: rma
 #: model:ir.model.fields.selection,name:rma.selection__rma_operation__action_create_refund__update_quantity
 msgid "Update Quantities"
-msgstr ""
+msgstr "Actualizar cantidades"
 
 #. module: rma
 #: model:ir.model.fields.selection,name:rma.selection__rma__priority__1
@@ -2527,12 +2531,12 @@ msgstr "Usuario: Solo mostrar documentos propios"
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
 msgid "Values set here are company-specific."
-msgstr ""
+msgstr "Los valores establecidos aquí son específicos de la empresa."
 
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.rma_operation_kanban
 msgid "View"
-msgstr ""
+msgstr "Ver"
 
 #. module: rma
 #: model:ir.model.fields.selection,name:rma.selection__rma__state__waiting_replacement
@@ -2589,6 +2593,9 @@ msgid ""
 "When the RMA is receive, allow to finsish it manually choosing\n"
 "                                    a finalization reason."
 msgstr ""
+"Cuando se recibe el RMA, se permite finalizar manualmente eligiendo\n"
+"\n"
+"                                    un motivo de finalización."
 
 #. module: rma
 #: model_terms:ir.ui.view,arch_db:rma.res_config_settings_view_form
