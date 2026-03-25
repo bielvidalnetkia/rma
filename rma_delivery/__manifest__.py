@@ -14,5 +14,6 @@
     "data": [
         "views/res_config_settings_views.xml",
         "views/rma_views.xml",
+        "wizard/stock_picking_return_views.xml",
     ],
 }

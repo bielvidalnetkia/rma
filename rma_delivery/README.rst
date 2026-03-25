@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ==================================================================
 Return Merchandise Authorization Management - Link with deliveries
 ==================================================================
@@ -17,7 +13,7 @@ Return Merchandise Authorization Management - Link with deliveries
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Frma-lightgray.png?logo=github
@@ -50,25 +46,25 @@ To configure RMAs shipping strategy for your company:
 2. Choose an *RMA delivery method strategy*.
 3. There are 4 possibilities:
 
-   - Fixed method: the method will always be the same. Select it on the
-     field *Default RMA delivery method* (or leave it empty for no
-     delivery method at all).
-   - Customer method: the method will be the one configured on the
-     partner.
-   - Mixed method: the method will be the one configured on the partner,
-     otherwise the fixed one will be chosen.
-   - RMA method: the method will be configured in each RMA.
+   -  Fixed method: the method will always be the same. Select it on the
+      field *Default RMA delivery method* (or leave it empty for no
+      delivery method at all).
+   -  Customer method: the method will be the one configured on the
+      partner.
+   -  Mixed method: the method will be the one configured on the
+      partner, otherwise the fixed one will be chosen.
+   -  RMA method: the method will be configured in each RMA.
 
 4. Choose an *RMA reception method strategy*.
 5. There are 4 possibilities:
 
-   - Fixed method: the method will always be the same. Select it on the
-     field *Default RMA delivery method* (or leave it empty for no
-     delivery method at all).
-   - Customer method: the method will be the one configured on the
-     partner.
-   - Mixed method: the method will be the one configured on the partner,
-     otherwise the fixed one will be chosen.
+   -  Fixed method: the method will always be the same. Select it on the
+      field *Default RMA delivery method* (or leave it empty for no
+      delivery method at all).
+   -  Customer method: the method will be the one configured on the
+      partner.
+   -  Mixed method: the method will be the one configured on the
+      partner, otherwise the fixed one will be chosen.
 
 Usage
 =====
@@ -101,12 +97,12 @@ Authors
 Contributors
 ------------
 
-- `Tecnativa <https://www.tecnativa.com>`__:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  - David Vidal
-  - Víctor Martínez
+   -  David Vidal
+   -  Víctor Martínez
 
-- Souheil Bejaoui - ACSONE SA/NV <souheil.bejaoui@acsone.eu>
+-  Souheil Bejaoui - ACSONE SA/NV <souheil.bejaoui@acsone.eu>
 
 Maintainers
 -----------
