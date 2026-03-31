@@ -14,6 +14,7 @@
         "views/rma_operation.xml",
         "views/rma.xml",
         "views/rma_portal_template.xml",
+        "wizards/rma_delivery_views.xml",
     ],
     "demo": [],
 }
