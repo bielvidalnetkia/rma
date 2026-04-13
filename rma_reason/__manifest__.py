@@ -17,6 +17,7 @@
         "views/rma_reason.xml",
         "views/res_config_settings.xml",
         "views/rma_portal_templates.xml",
+        "wizards/rma_rma_wizard_views.xml",
         "wizards/stock_return_picking.xml",
     ],
     "demo": [

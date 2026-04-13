@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ==========
 Rma Reason
 ==========
@@ -17,7 +13,7 @@ Rma Reason
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Frma-lightgray.png?logo=github
@@ -55,10 +51,10 @@ Configuration
 
 To configure this module, you need to:
 
-- Go to **Inventory > Settings > Settings** and select whether the
-  reason is mandatory or not.
-- Go to **RMA > Settings > RMA Reasons** and create the RMA reasons for
-  your company.
+-  Go to **Inventory > Settings > Settings** and select whether the
+   reason is mandatory or not.
+-  Go to **RMA > Settings > RMA Reasons** and create the RMA reasons for
+   your company.
 
 Usage
 =====
@@ -88,9 +84,9 @@ Authors
 Contributors
 ------------
 
-- Jacques-Etienne Baudoux - BCIM je@bcim.be
-- Souheil Bejaoui - ACSONE SA/NV souheil.bejaoui@acsone.eu
-- Marie Lejeune - ACSONE SA/NV marie.lejeune@acsone.eu
+-  Jacques-Etienne Baudoux - BCIM je@bcim.be
+-  Souheil Bejaoui - ACSONE SA/NV souheil.bejaoui@acsone.eu
+-  Marie Lejeune - ACSONE SA/NV marie.lejeune@acsone.eu
 
 Maintainers
 -----------
