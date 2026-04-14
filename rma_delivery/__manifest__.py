@@ -12,8 +12,10 @@
     "license": "AGPL-3",
     "depends": ["rma", "stock_delivery"],
     "data": [
+        "security/ir.model.access.csv",
         "views/res_config_settings_views.xml",
         "views/rma_views.xml",
+        "wizard/rma_choose_delivery_carrier_views.xml",
         "wizard/stock_picking_return_views.xml",
     ],
 }
