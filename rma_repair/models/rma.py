@@ -69,6 +69,7 @@ class RMA(models.Model):
             "default_address_id": self.partner_shipping_id.id,
             "default_partner_invoice_id": self.partner_invoice_id.id,
             "default_picking_id": self.reception_move_id.picking_id.id,
+            "default_user_id": False,
         }
         if self.lot_id:
             vals["default_lot_id"] = self.lot_id.id
@@ -97,11 +98,13 @@ class RMA(models.Model):
         self.ensure_one()
         if self.repair_id:
             return self.repair_id
-        return (
+        repair = (
             self.env["repair.order"]
             .with_context(**self._get_repair_order_default_vals())
-            .create({})
+            .create({"user_id": False})
         )
+
+        return repair
 
     def action_confirm(self):
         res = super().action_confirm()
