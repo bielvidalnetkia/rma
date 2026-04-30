@@ -7,7 +7,7 @@ from odoo import _, api, fields, models
 class RMA(models.Model):
     _inherit = "rma"
 
-    repair_id = fields.Many2one("repair.order")
+    repair_id = fields.Many2one("repair.order", copy=False)
     can_be_repaired = fields.Boolean(compute="_compute_can_be_repaired")
 
     @api.depends("repair_id", "state", "operation_id.action_create_repair")
