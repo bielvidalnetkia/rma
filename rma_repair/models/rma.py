@@ -35,7 +35,9 @@ class RMA(models.Model):
         res = super()._compute_can_be_returned()
         for r in self:
             r.can_be_returned = r.can_be_returned and (
-                not r.repair_id or r.repair_id.state == "done"
+                r.operation_id.action_create_delivery
+                in ("automatic_on_confirm", "automatic_after_receipt")
+                or (not r.repair_id or r.repair_id.state == "done")
             )
         return res
 
@@ -44,7 +46,9 @@ class RMA(models.Model):
         res = super()._compute_can_be_replaced()
         for r in self:
             r.can_be_replaced = r.can_be_replaced and (
-                not r.repair_id or r.repair_id.state == "cancel"
+                r.operation_id.action_create_delivery
+                in ("automatic_on_confirm", "automatic_after_receipt")
+                or (not r.repair_id or r.repair_id.state == "cancel")
             )
         return res
 
