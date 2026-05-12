@@ -16,6 +16,7 @@
         "views/res_config_settings_views.xml",
         "views/rma_views.xml",
         "wizard/rma_choose_delivery_carrier_views.xml",
+        "wizard/rma_rma_wizard_views.xml",
         "wizard/stock_picking_return_views.xml",
     ],
 }
