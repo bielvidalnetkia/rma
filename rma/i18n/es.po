@@ -2077,6 +2077,13 @@ msgid "Return Product"
 msgstr ""
 
 #. module: rma
+#. odoo-python
+#: code:addons/rma/models/stock_move.py:0
+#, python-format
+msgid "Return of %s"
+msgstr ""
+
+#. module: rma
 #: model:ir.actions.act_window,name:rma.rma_delivery_wizard_action
 #: model:ir.model.fields.selection,name:rma.selection__rma_delivery_wizard__type__return
 #: model_terms:ir.ui.view,arch_db:rma.rma_view_form
@@ -2091,8 +2098,8 @@ msgid ""
 "Return: <a href=\"#\" data-oe-model=\"stock.picking\" data-oe-"
 "id=\"%(id)d\">%(name)s</a> has been created."
 msgstr ""
-"Devolución: La orden de entrega <a href=\"#\" data-oe-model=\"stock."
-"picking\" data-oe-id=\"%(id)d\">%(name)s</a> ha sido creada."
+"Devolución: La orden de entrega <a href=\"#\" data-oe-"
+"model=\"stock.picking\" data-oe-id=\"%(id)d\">%(name)s</a> ha sido creada."
 
 #. module: rma
 #: model:ir.model.fields.selection,name:rma.selection__rma__state__returned
@@ -2376,8 +2383,8 @@ msgid ""
 "<jobs@example.odoo.com>"
 msgstr ""
 "El nombre de este seudónimo de correo electrónico. Por ejemplo, "
-"\"trabajos\", si lo que quiere es obtener los correos para <trabajos@example."
-"odoo.com>"
+"\"trabajos\", si lo que quiere es obtener los correos para "
+"<trabajos@example.odoo.com>"
 
 #. module: rma
 #: model:ir.model.fields,help:rma.field_rma_team__alias_user_id
